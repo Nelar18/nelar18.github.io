@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio - Manuel Martín</title>
+<title>Portfolio - Manuel Martín Martín</title>
 <style>
 :root {
   --bg: #0e0e0e;
@@ -18,10 +18,17 @@
 /* ===== RESET ===== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -62,6 +69,10 @@ nav a:hover {
 }
 
 /* ===== SECTIONS ===== */
+main {
+  flex: 1;
+}
+
 section {
   max-width: 1000px;
   margin: 0 auto;
@@ -212,14 +223,8 @@ footer {
   text-align: center;
   font-size: 0.9rem;
   opacity: 0.6;
-  margin-bottom: 20px;
-}
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
+  padding: 20px;
+  margin-top: auto;
 }
 </style>
 </head>
@@ -236,69 +241,69 @@ footer a:hover {
   </nav>
 </header>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    Soy un diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables.
-    Me encanta trabajar con motores como Unreal Engine y Godot, diseñar niveles que guíen al jugador de forma intuitiva
-    y colaborar con equipos multidisciplinares para llevar las ideas desde el concepto hasta el prototipo jugable.
-  </p>
-</section>
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      Soy un diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables.
+      Me encanta trabajar con motores como Unreal Engine y Godot, diseñar niveles que guíen al jugador de forma intuitiva
+      y colaborar con equipos multidisciplinares para llevar las ideas desde el concepto hasta el prototipo jugable.
+    </p>
+  </section>
 
-<section id="projects">
-  <h2>Proyectos</h2>
-  <div class="carousel-container">
-    <button id="btnPrev" class="carousel-btn" aria-label="Anterior">❮</button>
+  <section id="projects">
+    <h2>Proyectos</h2>
+    <div class="carousel-container">
+      <button id="btnPrev" class="carousel-btn" aria-label="Anterior">❮</button>
 
-    <div id="carousel" class="carousel" role="list">
+      <div id="carousel" class="carousel" role="list">
+        <article class="project-card" role="listitem">
+          <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener" class="project-link">
+            <div class="project-image">
+              <img src="img/underpacked_logo.png" alt="Underpacked logo">
+            </div>
+            <div class="project-info">
+              <h3>Underpacked</h3>
+              <p>Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. UE5.</p>
+              <span class="ver-link">Ver en Steam</span>
+            </div>
+          </a>
+        </article>
 
-      <article class="project-card" role="listitem">
-        <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener" class="project-link">
-          <div class="project-image">
-            <img src="img/underpacked_logo.png" alt="Underpacked logo">
-          </div>
-          <div class="project-info">
-            <h3>Underpacked</h3>
-            <p>Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. UE5.</p>
-            <span class="ver-link">Ver en Steam</span>
-          </div>
-        </a>
-      </article>
+        <article class="project-card" role="listitem">
+          <a href="https://example.com/juego2" target="_blank" rel="noopener" class="project-link">
+            <div class="project-image">
+              <img src="img/game2_logo.png" alt="Cosmic Trails logo">
+            </div>
+            <div class="project-info">
+              <h3>Cosmic Trails</h3>
+              <p>Explora galaxias perdidas en un viaje musical y visual con estética synthwave retro.</p>
+              <span class="ver-link">Ver en Itch.io</span>
+            </div>
+          </a>
+        </article>
 
-      <article class="project-card" role="listitem">
-        <a href="https://example.com/juego2" target="_blank" rel="noopener" class="project-link">
-          <div class="project-image">
-            <img src="img/game2_logo.png" alt="Cosmic Trails logo">
-          </div>
-          <div class="project-info">
-            <h3>Cosmic Trails</h3>
-            <p>Explora galaxias perdidas en un viaje musical y visual con estética synthwave retro.</p>
-            <span class="ver-link">Ver en Itch.io</span>
-          </div>
-        </a>
-      </article>
+        <article class="project-card" role="listitem">
+          <a href="https://example.com/juego3" target="_blank" rel="noopener" class="project-link">
+            <div class="project-image">
+              <img src="img/game3_logo.png" alt="Wool You Fight logo">
+            </div>
+            <div class="project-info">
+              <h3>Wool You Fight?</h3>
+              <p>Defiende al rebaño siendo la oveja negra en este shooter tipo survivors lleno de humor.</p>
+              <span class="ver-link">Ver en Itch.io</span>
+            </div>
+          </a>
+        </article>
+      </div>
 
-      <article class="project-card" role="listitem">
-        <a href="https://example.com/juego3" target="_blank" rel="noopener" class="project-link">
-          <div class="project-image">
-            <img src="img/game3_logo.png" alt="Wool You Fight logo">
-          </div>
-          <div class="project-info">
-            <h3>Wool You Fight?</h3>
-            <p>Defiende al rebaño siendo la oveja negra en este shooter tipo survivors lleno de humor.</p>
-            <span class="ver-link">Ver en Itch.io</span>
-          </div>
-        </a>
-      </article>
-
+      <button id="btnNext" class="carousel-btn" aria-label="Siguiente">❯</button>
     </div>
-
-    <button id="btnNext" class="carousel-btn" aria-label="Siguiente">❯</button>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
-  <p>© 2025 Manuel Martín — <a href="https://linktr.ee/drunkenduckco" target="_blank" rel="noopener">Linktree</a></p>
+  © 2025 Manuel Martín Martín
 </footer>
 
 <script>
