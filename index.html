@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio de Manuel Martín</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #0f0f0f;
+      color: #f5f5f5;
+    }
+
+    header {
+      background: #1a1a1a;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    nav a {
+      color: #f5f5f5;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00bfff;
+    }
+
+    section {
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .about {
+      text-align: center;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0,191,255,0.3);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-card .content {
+      padding: 1rem;
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #00bfff;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1a1a1a;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Manuel Martín</h1>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#projects">Proyectos</a>
+      <a href="https://www.linkedin.com/in/tu-linkedin" target="_blank">LinkedIn</a>
+      <a href="https://tuusuario.itch.io/" target="_blank">Itch.io</a>
+    </nav>
+  </header>
+
+  <section id="about" class="about">
+    <h2>Sobre mí</h2>
+    <p>
+      Soy diseñador y programador de videojuegos. Me apasiona crear experiencias interactivas que mezclen emoción y diseño inteligente. 
+      He trabajado en varios proyectos indie, aprendiendo a equilibrar jugabilidad, narrativa y estética.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Proyectos</h2>
+    <div class="projects">
+      <div class="project-card">
+        <img src="https://placehold.co/600x400?text=Underpacked" alt="Underpacked">
+        <div class="content">
+          <h3>Underpacked</h3>
+          <p>
+            Juego cooperativo local en el que los jugadores gestionan una nave espacial enviando paquetes y enfrentándose a oleadas de enemigos. 
+            Desarrollado en Unreal Engine 5.
+          </p>
+          <a href="https://tuusuario.itch.io/underpacked" target="_blank">Ver en Itch.io</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://placehold.co/600x400?text=Rookie+Mistakes+Not+Allowed" alt="Rookie Mistakes Not Allowed">
+        <div class="content">
+          <h3>Rookie Mistakes Not Allowed</h3>
+          <p>
+            Juego arcade donde cada error cuenta. Mezcla reflejos y estrategia para superar los desafíos. 
+            Inspirado en clásicos de habilidad con un toque moderno.
+          </p>
+          <a href="https://tuusuario.itch.io/rookie-mistakes-not-allowed" target="_blank">Ver en Itch.io</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://placehold.co/600x400?text=Juego+de+Cartas" alt="Juego de Cartas">
+        <div class="content">
+          <h3>Juego de Cartas</h3>
+          <p>
+            Un juego basado en la baraja española que combina estrategia y azar. Inspirado en títulos como Balatro y Slay the Spire.
+          </p>
+          <a href="https://tuusuario.itch.io/juego-de-cartas" target="_blank">Ver en Itch.io</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Manuel Martín — Todos los derechos reservados
+  </footer>
+
+</body>
+</html>
