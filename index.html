@@ -6,8 +6,8 @@
 <title>Portfolio - Manuel Martín</title>
 <style>
 :root {
-  --bg: #0d0d0d;
-  --panel: #1a1a1a;
+  --bg: #0e0e0e;
+  --panel: #1c1c1c;
   --accent: #00bfff;
   --text: #f2f2f2;
   --gap: 24px;
@@ -15,78 +15,89 @@
   --transition: 0.3s ease;
 }
 
-* { box-sizing: border-box; }
+/* ===== RESET ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ====== HEADER ====== */
+/* ===== HEADER ===== */
 header {
   text-align: center;
   padding: 60px 20px 20px;
-  max-width: 900px;
 }
+
 header h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+  font-size: 2.6rem;
   color: var(--accent);
+  margin-bottom: 18px;
 }
-header p {
-  opacity: 0.85;
-  font-size: 1.05rem;
-  max-width: 600px;
+
+/* ===== NAVIGATION ===== */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 50px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  background: var(--panel);
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  transition: background var(--transition), transform var(--transition);
+  font-weight: 500;
+}
+
+nav a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* ===== SECTIONS ===== */
+section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+h2 {
+  color: var(--accent);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+#about p {
+  text-align: center;
+  line-height: 1.7;
+  opacity: 0.9;
+  max-width: 720px;
   margin: 0 auto;
 }
 
-/* ====== ABOUT ME ====== */
-section#about {
-  max-width: 800px;
-  margin: 20px auto 40px;
-  text-align: center;
-  padding: 0 20px;
-}
-#about h2 {
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-#about p {
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-/* ====== CARRUSEL ====== */
-section#projects {
-  width: 100%;
-  max-width: 1080px;
-  position: relative;
-  margin-bottom: 40px;
-  overflow: hidden;
-}
-
+/* ===== CARRUSEL ===== */
 .carousel-container {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 20px 0;
+  padding: 40px 0;
 }
 
 .carousel {
   display: flex;
+  justify-content: center;
   gap: var(--gap);
   scroll-behavior: smooth;
   overflow: hidden;
-  padding: 10px;
-  justify-content: center;
   scroll-snap-type: x mandatory;
+  padding: 10px 0;
 }
 
 .project-card {
@@ -120,7 +131,7 @@ section#projects {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 160px;
+  height: 180px;
   transition: transform 0.35s ease, opacity 0.35s ease;
   overflow: hidden;
 }
@@ -161,7 +172,7 @@ section#projects {
   text-underline-offset: 2px;
 }
 
-/* ====== BOTONES ====== */
+/* ===== BOTONES DE CARRUSEL ===== */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -169,29 +180,34 @@ section#projects {
   background: rgba(0,0,0,0.4);
   border: none;
   color: var(--accent);
-  font-size: 1.8rem;
-  padding: 8px 12px;
+  font-size: 2rem;
+  padding: 10px 16px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 10;
-  transition: background var(--transition);
+  transition: background var(--transition), transform var(--transition);
 }
 
 .carousel-btn:hover {
   background: rgba(0,191,255,0.3);
+  transform: translateY(-50%) scale(1.1);
 }
 
-#btnPrev { left: -10px; }
-#btnNext { right: -10px; }
+#btnPrev { left: -70px; }
+#btnNext { right: -70px; }
 
 @media (max-width: 960px) {
   .project-card { flex: 0 0 calc((100% - var(--gap)) / 2); }
+  #btnPrev { left: -50px; }
+  #btnNext { right: -50px; }
 }
 @media (max-width: 620px) {
   .project-card { flex: 0 0 100%; }
+  #btnPrev { left: -40px; }
+  #btnNext { right: -40px; }
 }
 
-/* ====== FOOTER ====== */
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -211,20 +227,26 @@ footer a:hover {
 <body>
 
 <header>
-  <h1>Manuel Martín</h1>
-  <p>Game Designer & Level Designer — especializado en diseño de experiencias interactivas y sistemas de juego.</p>
+  <h1>Manuel Martín Martín</h1>
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#projects">Proyectos</a>
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://manuelmartin.itch.io" target="_blank" rel="noopener">Itch.io</a>
+  </nav>
 </header>
 
 <section id="about">
   <h2>About Me</h2>
   <p>
-    Soy un diseñador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables.
+    Soy un diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables.
     Me encanta trabajar con motores como Unreal Engine y Godot, diseñar niveles que guíen al jugador de forma intuitiva
     y colaborar con equipos multidisciplinares para llevar las ideas desde el concepto hasta el prototipo jugable.
   </p>
 </section>
 
 <section id="projects">
+  <h2>Proyectos</h2>
   <div class="carousel-container">
     <button id="btnPrev" class="carousel-btn" aria-label="Anterior">❮</button>
 
@@ -310,6 +332,7 @@ footer a:hover {
     const maxScroll = Math.max(0, carousel.scrollWidth - carousel.clientWidth);
     const nextScroll = carousel.scrollLeft + distance;
 
+    // Wrapeable
     if (nextScroll > maxScroll + 10) {
       carousel.scrollTo({ left: 0, behavior: 'smooth' });
     } else if (nextScroll < -10) {
