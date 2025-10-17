@@ -15,7 +15,11 @@
   --transition: 0.3s ease;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: 'Inter', sans-serif;
@@ -63,6 +67,29 @@ nav a:hover {
   transform: scale(1.05);
 }
 
+/* SECTIONS */
+main { flex: 1; }
+
+section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+h2 {
+  color: var(--accent);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+#about p {
+  text-align: center;
+  line-height: 1.7;
+  opacity: 0.9;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
 /* CARRUSEL */
 .carousel-container {
   position: relative;
@@ -89,9 +116,8 @@ nav a:hover {
 }
 
 .project-card:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
   box-shadow: 0 12px 32px rgba(0,191,255,0.45);
-  z-index: 5;
 }
 
 .project-image {
@@ -129,7 +155,7 @@ nav a:hover {
 .project-info p {
   font-size: 0.9rem;
   opacity: 0.85;
-  margin: 0 0 8px;
+  margin-bottom: 8px;
 }
 
 .project-info .ver-link {
@@ -202,6 +228,8 @@ footer {
     <h2>About Me</h2>
     <p>
       Soy un diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables.
+      Me encanta trabajar con motores como Unreal Engine y Godot, diseñar niveles que guíen al jugador de forma intuitiva
+      y colaborar con equipos multidisciplinares para llevar las ideas desde el concepto hasta el prototipo jugable.
     </p>
   </section>
 
@@ -262,7 +290,9 @@ footer {
   </section>
 </main>
 
-<footer>© 2025 Manuel Martín Martín</footer>
+<footer>
+  © 2025 Manuel Martín Martín
+</footer>
 
 <script>
 (function(){
@@ -291,7 +321,7 @@ footer {
     if (currentIndex < cards.length - visible) {
       currentIndex++;
     } else {
-      currentIndex = 0; // volver al inicio
+      currentIndex = 0; // reinicia al inicio
     }
     updateCarousel();
   }
@@ -301,7 +331,7 @@ footer {
     if (currentIndex > 0) {
       currentIndex--;
     } else {
-      currentIndex = cards.length - visible;
+      currentIndex = cards.length - visible; // ir al final
     }
     updateCarousel();
   }
