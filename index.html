@@ -231,8 +231,8 @@ footer a:hover {
   <nav>
     <a href="#about">About Me</a>
     <a href="#projects">Proyectos</a>
-    <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://manuelmartin.itch.io" target="_blank" rel="noopener">Itch.io</a>
+    <a href="https://www.linkedin.com/in/nelar/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://nelar.itch.io/" target="_blank" rel="noopener">Itch.io</a>
   </nav>
 </header>
 
@@ -332,7 +332,6 @@ footer a:hover {
     const maxScroll = Math.max(0, carousel.scrollWidth - carousel.clientWidth);
     const nextScroll = carousel.scrollLeft + distance;
 
-    // Wrapeable
     if (nextScroll > maxScroll + 10) {
       carousel.scrollTo({ left: 0, behavior: 'smooth' });
     } else if (nextScroll < -10) {
