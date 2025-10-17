@@ -10,8 +10,7 @@
   --panel: #17191e;
   --accent: #00bfff;
   --text: #f3f4f6;
-  --gap: 24px;
-  --radius: 16px;
+  --radius: 14px;
   --transition: 0.3s ease;
 }
 
@@ -62,11 +61,11 @@ nav a:hover {
   transform: translateY(-2px);
 }
 
-/* SECTIONS */
+/* MAIN */
 main {
   flex: 1;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -80,112 +79,72 @@ section h2 {
   font-size: 1.8rem;
 }
 
-/* CARRUSEL */
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  padding: 20px 0;
-}
-
-.carousel {
-  display: flex;
-  gap: var(--gap);
-  scroll-behavior: smooth;
-  overflow: hidden;
-  justify-content: center;
-  transition: transform 0.5s ease;
-}
-
-.project-card {
-  background: var(--panel);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  flex: 0 0 calc((100% - (var(--gap) * 2)) / 3);
+/* PROYECTOS (LISTA SIMPLE) */
+.project-list {
   display: flex;
   flex-direction: column;
+  gap: 30px;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  padding: 20px;
   transition: transform var(--transition), box-shadow var(--transition);
 }
-.project-card:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(0, 191, 255, 0.45);
+.project-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(0,191,255,0.3);
 }
 .project-image {
+  flex: 0 0 180px;
+  height: 120px;
   background: #0f1115;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 .project-image img {
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  opacity: 0.9;
-  transition: transform 0.4s ease, opacity 0.4s ease;
 }
-.project-card:hover .project-image img {
-  transform: scale(1.1);
-  opacity: 1;
+.project-content {
+  flex: 1;
 }
-.project-info {
-  padding: 16px;
-  text-align: center;
-}
-.project-info h3 {
-  margin: 8px 0;
-  font-size: 1.1rem;
-  color: #ff7676;
-}
-.project-info p {
-  font-size: 0.9rem;
-  opacity: 0.85;
-  margin-bottom: 8px;
-  line-height: 1.4em;
-}
-.project-info .ver-link {
+.project-content h3 {
+  font-size: 1.2rem;
   color: var(--accent);
+  margin-bottom: 8px;
+}
+.project-content p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.project-content a {
+  color: #ff7474;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-/* BOTONES */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  color: var(--accent);
-  font-size: 2rem;
-  padding: 12px 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: background var(--transition), transform var(--transition);
-  backdrop-filter: blur(4px);
-}
-.carousel-btn:hover {
-  background: rgba(0, 191, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
-}
-#btnPrev {
-  left: -10px;
-}
-#btnNext {
-  right: -10px;
-}
-
 /* RESPONSIVE */
-@media (max-width: 960px) {
-  .project-card {
-    flex: 0 0 calc((100% - var(--gap)) / 2);
+@media (max-width: 640px) {
+  .project-item {
+    flex-direction: column;
+    text-align: center;
   }
-}
-@media (max-width: 620px) {
-  .project-card {
-    flex: 0 0 100%;
+  .project-image {
+    width: 100%;
+    height: 180px;
   }
 }
 
@@ -222,110 +181,76 @@ footer {
 
   <section id="projects">
     <h2>Proyectos</h2>
-    <div class="carousel-container">
-      <button id="btnPrev" class="carousel-btn" aria-label="Anterior">❮</button>
-      <div id="carousel" class="carousel">
-        <article class="project-card">
+    <div class="project-list">
+
+      <!-- 🕹️ JUEGO 1 -->
+      <div class="project-item">
+        <div class="project-image">
           <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">
-            <div class="project-image">
-              <img src="img/underpacked_logo.png" alt="Underpacked logo">
-            </div>
-            <div class="project-info">
-              <h3>Underpacked</h3>
-              <p>Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. UE5.</p>
-              <span class="ver-link">Ver en Steam</span>
-            </div>
+            <img src="img/underpacked_logo.png" alt="Underpacked logo">
           </a>
-        </article>
-
-        <article class="project-card">
-          <a href="https://eddricman.itch.io/goofyathlon" target="_blank">
-            <div class="project-image">
-              <img src="img/goofyathlon.png" alt="Goofyathlon logo">
-            </div>
-            <div class="project-info">
-              <h3>Goofyathlon</h3>
-              <p>Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.</p>
-              <span class="ver-link">Ver en Itch.io</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="project-card">
-          <a href="https://nelar.itch.io/carnival-swap" target="_blank">
-            <div class="project-image">
-              <img src="img/carnival_swap.png" alt="Carnival Swap logo">
-            </div>
-            <div class="project-info">
-              <h3>Carnival Swap</h3>
-              <p>Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.</p>
-              <span class="ver-link">Ver en Itch.io</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="project-card">
-          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">
-            <div class="project-image">
-              <img src="img/bubblegum_royale.png" alt="Bubble Gum Royale logo">
-            </div>
-            <div class="project-info">
-              <h3>Bubble Gum Royale</h3>
-              <p>Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena.</p>
-              <span class="ver-link">Ver en Itch.io</span>
-            </div>
-          </a>
-        </article>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a></h3>
+          <p>
+            <!-- 🔧 CAMBIA ESTA DESCRIPCIÓN -->
+            Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.
+          </p>
+        </div>
       </div>
-      <button id="btnNext" class="carousel-btn" aria-label="Siguiente">❯</button>
+
+      <!-- 🕹️ JUEGO 2 -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://eddricman.itch.io/goofyathlon" target="_blank">
+            <img src="img/goofyathlon.png" alt="Goofyathlon logo">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a></h3>
+          <p>
+            <!-- 🔧 CAMBIA ESTA DESCRIPCIÓN -->
+            Compite en disparatadas pruebas atléticas multijugador llenas de caos, humor y diversión en este título party-game.
+          </p>
+        </div>
+      </div>
+
+      <!-- 🕹️ JUEGO 3 -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://nelar.itch.io/carnival-swap" target="_blank">
+            <img src="img/carnival_swap.png" alt="Carnival Swap logo">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a></h3>
+          <p>
+            <!-- 🔧 CAMBIA ESTA DESCRIPCIÓN -->
+            Juego competitivo local donde intercambias habilidades para vencer en diversos minijuegos de feria.
+          </p>
+        </div>
+      </div>
+
+      <!-- 🕹️ JUEGO 4 -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">
+            <img src="img/bubblegum_royale.png" alt="Bubble Gum Royale logo">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a></h3>
+          <p>
+            <!-- 🔧 CAMBIA ESTA DESCRIPCIÓN -->
+            Combate sobre una galleta giratoria y evita caer al vacío en este battle arena con estética colorida y caótica.
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 </main>
 
 <footer>© 2025 Manuel Martín Martín</footer>
-
-<script>
-(function () {
-  const carousel = document.getElementById("carousel");
-  const btnPrev = document.getElementById("btnPrev");
-  const btnNext = document.getElementById("btnNext");
-
-  let currentIndex = 0;
-
-  function getVisibleCards() {
-    const vw = window.innerWidth;
-    if (vw <= 620) return 1;
-    if (vw <= 960) return 2;
-    return 3;
-  }
-
-  function scrollToIndex() {
-    const cards = carousel.querySelectorAll(".project-card");
-    const cardWidth = cards[0].offsetWidth + 24;
-    carousel.scrollTo({
-      left: currentIndex * cardWidth,
-      behavior: "smooth",
-    });
-  }
-
-  btnNext.addEventListener("click", () => {
-    const cards = carousel.querySelectorAll(".project-card");
-    const visible = getVisibleCards();
-    const total = cards.length;
-    currentIndex = (currentIndex + visible) % total; // wrap hacia adelante
-    scrollToIndex();
-  });
-
-  btnPrev.addEventListener("click", () => {
-    const cards = carousel.querySelectorAll(".project-card");
-    const visible = getVisibleCards();
-    const total = cards.length;
-    currentIndex = (currentIndex - visible + total) % total; // wrap hacia atrás
-    scrollToIndex();
-  });
-
-  window.addEventListener("resize", scrollToIndex);
-})();
-</script>
 </body>
 </html>
