@@ -1,97 +1,329 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manuel Martín - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portfolio - Carrusel corregido</title>
+<style>
+  :root{
+    --bg:#0f0f0f;
+    --panel:#1c1c1c;
+    --muted:#aaa;
+    --accent:#00bfff;
+    --gap:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:#fff;
+  }
+
+  header{ background:#141414; padding:22px; text-align:center }
+  header h1{ margin:0; font-size:28px }
+  nav{ margin-top:10px }
+  nav a{ color:var(--muted); margin:0 10px; text-decoration:none }
+  nav a:hover{ color:var(--accent) }
+
+  section{ max-width:1100px; margin:28px auto; padding:0 16px }
+
+  h2{ margin-bottom:12px }
+
+  /* Contenedor del carrusel */
+  .carousel-container{
+    position:relative;
+    margin: 0 auto 50px;
+    max-width:1100px;
+  }
+
+  /* viewport que recorta el contenido (no hidescrolling) */
+  .carousel-viewport{
+    overflow:hidden;
+    padding: 0 12px; /* espacio interno para que las tarjetas no peguen al borde */
+  }
+
+  /* fila flexible que hace scroll horizontal */
+  .carousel{
+    display:flex;
+    gap:var(--gap);
+    overflow-x:auto;                /* importante: permite scroll programático y por arrastre */
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px;
+    scroll-snap-type:x mandatory;   /* snap para que las tarjetas queden alineadas */
+  }
+  .carousel::-webkit-scrollbar{ height:8px }
+  .carousel::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.06); border-radius:8px }
+
+  /* tarjetas */
+  .project-card{
+    background:var(--panel);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.6);
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    scroll-snap-align:start;        /* alineación de snap */
+  }
+
+  /* ancho de tarjeta para mostrar 3 visibles (se ajusta con CSS responsive) */
+  .carousel .project-card{
+    flex:0 0 calc((100% - (2 * var(--gap))) / 3); /* 3 visibles, restando 2 gaps */
+  }
+
+  .project-image{
+    background:#2b2b2b;
+    color:#9b9b9b;
+    padding:44px 20px;
+    text-align:center;
+    font-size:20px;
+  }
+  .project-info{ padding:14px 16px; color:#e8e8e8; text-align:left; display:flex; flex-direction:column; gap:8px }
+  .project-info h3{ margin:0; font-size:16px }
+  .project-info p{ margin:0; font-size:14px; line-height:1.5; color:#dcdcdc; flex:1 }
+  .project-info a{ color:var(--accent); text-decoration:none; font-weight:600 }
+
+  /* botones flecha (más alejados) */
+  .carousel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border-radius:999px;
+    border:0;
+    background:rgba(0,0,0,0.55);
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:4;
+    transition:transform .12s, background .12s, opacity .12s;
+  }
+  .carousel-btn:hover{ background: rgba(0,191,255,0.85); transform:translateY(-50%) scale(1.03) }
+  .carousel-btn:active{ transform:translateY(-50%) scale(.98) }
+  /* los colocamos fuera del área de tarjetas con más separación */
+  .carousel-btn.left{ left: calc(-48px - 28px); }  /* botón a la izquierda, fuera del contenedor */
+  .carousel-btn.right{ right: calc(-48px - 28px); }
+
+  .carousel-btn[disabled]{ opacity:.35; cursor:default; }
+
+  /* responsive: 2 visibles en tablets */
+  @media (max-width:960px){
+    .carousel .project-card{ flex:0 0 calc((100% - var(--gap)) / 2) } /* 2 visibles */
+    .carousel-btn.left{ left: -42px }
+    .carousel-btn.right{ right: -42px }
+  }
+
+  /* mobile: 1 visible */
+  @media (max-width:620px){
+    header h1{ font-size:20px }
+    .carousel .project-card{ flex:0 0 100% } /* 1 visible */
+    .carousel-btn.left{ left: -36px }
+    .carousel-btn.right{ right: -36px }
+    .project-image{ padding:34px 12px; font-size:18px }
+  }
+
+  footer{ text-align:center; padding:18px; color:#999; background:#121212 }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Manuel Martín</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Proyectos</a>
-      <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
-      <a href="https://manuelmartin.itch.io" target="_blank">Itch.io</a>
-    </nav>
-  </header>
 
-  <section id="about">
-    <h2>Sobre mí</h2>
-    <p>
-      Diseñador y programador de videojuegos con ganas de aprender y colaborar en proyectos indie.
-      Me interesa mezclar jugabilidad, narrativa y estética clara.
-    </p>
-  </section>
+<header>
+  <h1>Manuel Martín</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Proyectos</a>
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://manuelmartin.itch.io" target="_blank" rel="noopener">Itch.io</a>
+  </nav>
+</header>
 
-  <section id="projects">
-    <h2>Proyectos</h2>
-    <div class="carousel-container">
-      <button class="carousel-btn left" id="prevBtn">&#10094;</button>
-      <div class="carousel">
-        <div class="project-card">
+<section id="about">
+  <h2>Sobre mí</h2>
+  <p style="max-width:720px;margin:8px auto;color:#d6d6d6">
+    Diseñador y programador de videojuegos con ganas de aprender y colaborar en proyectos indie.
+    Me interesa mezclar jugabilidad, narrativa y estética clara.
+  </p>
+</section>
+
+<section id="projects">
+  <h2>Proyectos</h2>
+
+  <div class="carousel-container" aria-label="Carrusel de proyectos">
+    <button class="carousel-btn left" id="btnPrev" aria-label="Anterior">&#10094;</button>
+
+    <div class="carousel-viewport">
+      <div class="carousel" id="carousel" role="list">
+        <!-- Añade/quita project-card según necesites -->
+        <article class="project-card" role="listitem">
           <div class="project-image">Underpacked</div>
           <div class="project-info">
             <h3>Underpacked</h3>
             <p>Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. UE5.</p>
-            <a href="#" target="_blank">Ver en Itch.io</a>
+            <a href="#" target="_blank" rel="noopener">Ver en Itch.io</a>
           </div>
-        </div>
+        </article>
 
-        <div class="project-card">
-          <div class="project-image">Rookie Mistakes Not Allowed</div>
+        <article class="project-card" role="listitem">
+          <div class="project-image">Rookie Mistakes</div>
           <div class="project-info">
             <h3>Rookie Mistakes Not Allowed</h3>
             <p>Arcade de precisión con mecánicas de riesgo/recompensa y diseño afilado.</p>
-            <a href="#" target="_blank">Ver en Itch.io</a>
+            <a href="#" target="_blank" rel="noopener">Ver en Itch.io</a>
           </div>
-        </div>
+        </article>
 
-        <div class="project-card">
+        <article class="project-card" role="listitem">
           <div class="project-image">Juego de Cartas</div>
           <div class="project-info">
             <h3>Juego de Cartas</h3>
             <p>Táctico con baraja española: combina azar y decisiones estratégicas.</p>
-            <a href="#" target="_blank">Ver en Itch.io</a>
+            <a href="#" target="_blank" rel="noopener">Ver en Itch.io</a>
           </div>
-        </div>
+        </article>
 
-        <div class="project-card">
+        <article class="project-card" role="listitem">
           <div class="project-image">Unveiled</div>
           <div class="project-info">
             <h3>Unveiled</h3>
             <p>Metroidvania sobre duelo y aceptación, con mecánicas que cambian por etapas.</p>
-            <a href="#" target="_blank">Ver en Itch.io</a>
+            <a href="#" target="_blank" rel="noopener">Ver en Itch.io</a>
           </div>
-        </div>
+        </article>
 
-        <div class="project-card">
+        <article class="project-card" role="listitem">
           <div class="project-image">Pac-Man Maldito</div>
           <div class="project-info">
             <h3>Pac-Man Maldito</h3>
             <p>Híbrido terror/puzzle con narrativa interactiva y ambientación retro.</p>
-            <a href="#" target="_blank">Ver en Itch.io</a>
+            <a href="#" target="_blank" rel="noopener">Ver en Itch.io</a>
           </div>
-        </div>
+        </article>
 
-        <div class="project-card">
+        <article class="project-card" role="listitem">
           <div class="project-image">Oveja Negra</div>
           <div class="project-info">
             <h3>Oveja Negra</h3>
             <p>Brotato-like donde la oveja negra lucha contra hordas y mejora equipo entre oleadas.</p>
-            <a href="#" target="_blank">Ver en Itch.io</a>
+            <a href="#" target="_blank" rel="noopener">Ver en Itch.io</a>
           </div>
-        </div>
+        </article>
+
       </div>
-      <button class="carousel-btn right" id="nextBtn">&#10095;</button>
     </div>
-  </section>
 
-  <footer>
-    © 2025 Manuel Martín — Todos los derechos reservados
-  </footer>
+    <button class="carousel-btn right" id="btnNext" aria-label="Siguiente">&#10095;</button>
+  </div>
 
-  <script src="script.js"></script>
+</section>
+
+<footer>© 2025 Manuel Martín — Todos los derechos reservados</footer>
+
+<script>
+/*
+  Lógica del carrusel:
+  - Recalcula el ancho de tarjeta (incluyendo gap) al hacer clic / resize.
+  - Usa scroll-snap para alinear y scrollBy para desplazar.
+  - Deshabilita botones en inicio/fin.
+*/
+
+(function(){
+  const carousel = document.getElementById('carousel');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+
+  // Obtiene el valor numérico del gap (CSS)
+  function getGapPx(){
+    const style = getComputedStyle(carousel);
+    // modern browsers support gap; fallback a variable
+    const gap = style.gap || style.columnGap || '20px';
+    return parseFloat(gap);
+  }
+
+  // Calcula el ancho real "visible step" según cuántas tarjetas haya visibles (3/2/1)
+  function computeStep(){
+    // coger la primera tarjeta
+    const first = carousel.querySelector('.project-card');
+    if(!first) return 300;
+    const rect = first.getBoundingClientRect();
+    const gap = getGapPx();
+    // rect.width es el ancho de la tarjeta actual
+    return Math.round(rect.width + gap);
+  }
+
+  // actualizar estado botones
+  function updateButtons(){
+    const maxScroll = Math.max(0, carousel.scrollWidth - carousel.clientWidth);
+    btnPrev.disabled = carousel.scrollLeft <= 5;
+    btnNext.disabled = carousel.scrollLeft >= maxScroll - 5;
+  }
+
+  // desplazamiento por "page" (n tarjetas visibles)
+  function scrollStep(direction = 1){
+    // Queremos desplazar exactamente N tarjetas visibles (p. ej. 3 en desktop).
+    // Podemos inferir cuántas están visibles mediante el ancho del contenedor y la tarjeta.
+    const step = computeStep();
+    // Intentaremos desplazar por 3 * step en desktop, 2 en tablet, 1 en móvil.
+    const vw = window.innerWidth;
+    let visible = 3;
+    if(vw <= 620) visible = 1;
+    else if(vw <= 960) visible = 2;
+
+    const distance = step * visible * direction;
+
+    // Para evitar overscroll, calculamos destino y lo clavamos entre 0 y max
+    const target = Math.min(Math.max(0, carousel.scrollLeft + distance), carousel.scrollWidth - carousel.clientWidth);
+    carousel.scrollTo({ left: target, behavior: 'smooth' });
+  }
+
+  // manejadores
+  btnNext.addEventListener('click', () => scrollStep(1));
+  btnPrev.addEventListener('click', () => scrollStep(-1));
+
+  // actualiza botones al hacer scroll (y al terminar, snap los alinea)
+  let isScrolling;
+  carousel.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateButtons);
+    clearTimeout(isScrolling);
+    isScrolling = setTimeout(() => {
+      // SNAP: redondeamos al múltiplo más cercano del paso
+      const step = computeStep();
+      if(step <= 0) return;
+      const current = carousel.scrollLeft;
+      const nearest = Math.round(current / step) * step;
+      carousel.scrollTo({ left: nearest, behavior: 'smooth' });
+    }, 150);
+  });
+
+  // recalcula al cambiar tamaño de ventana
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // forzamos recalculo y actualizamos botones
+      updateButtons();
+    }, 120);
+  });
+
+  // Init
+  // small delay to allow fonts/images to settle
+  setTimeout(() => {
+    updateButtons();
+    // ensure focus/keyboard usage: left/right arrows
+    carousel.tabIndex = 0;
+    carousel.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowRight'){ e.preventDefault(); scrollStep(1); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); scrollStep(-1); }
+    });
+  }, 120);
+
+})();
+</script>
+
 </body>
 </html>
