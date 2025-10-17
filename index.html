@@ -1,110 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portfolio de Manuel Martín</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background-color: #0f0f0f;
-      color: #f5f5f5;
+    :root{
+      --bg: #0f0f0f;
+      --panel: #1c1c1c;
+      --muted: #aaa;
+      --accent: #00bfff;
+      --gap: 1.5rem;
     }
 
-    header {
-      background: #1a1a1a;
-      padding: 2rem;
-      text-align: center;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:var(--bg);
+      color:#f5f5f5;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    header{
+      background:#1a1a1a;
+      padding:2rem;
+      text-align:center;
+    }
+    header h1{margin:0;font-size:2.4rem}
+    nav{margin-top:0.6rem}
+    nav a{
+      color:inherit;
+      text-decoration:none;
+      margin:0 .8rem;
+      font-weight:500;
+      opacity:0.9;
+    }
+    nav a:hover{color:var(--accent)}
+
+    section{max-width:1100px;margin:2.2rem auto;padding:0 1rem}
+
+    .about{ text-align:center}
+    .about p{max-width:760px;margin:0.8rem auto;font-size:1.05rem;line-height:1.6;color:#ddd}
+
+    /* --- Proyectos --- */
+    h2{margin-bottom:1rem}
+    /* Grid para las primeras 3 tarjetas fijas (siempre estarán visibles) */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:var(--gap);
+      margin-bottom:2rem;
     }
 
-    nav a {
-      color: #f5f5f5;
-      margin: 0 1rem;
-      text-decoration: none;
-      transition: color 0.3s;
+    .project-card{
+      background:var(--panel);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,0.5);
+      transition:transform .25s,box-shadow .25s;
+      display:flex;
+      flex-direction:column;
+      min-height:220px;
+    }
+    .project-card:hover{ transform:translateY(-6px); box-shadow:0 10px 30px rgba(0,191,255,0.12) }
+
+    .project-card img{
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      display:block;
+    }
+    .project-card .content{ padding:0.9rem 1rem; flex:1; display:flex;flex-direction:column }
+    .project-card h3{ margin:0 0 .4rem 0; font-size:1.05rem }
+    .project-card p{ margin:0; font-size:0.95rem; color:#e6e6e6; flex:1; line-height:1.45 }
+    .project-card a{ margin-top:.6rem; color:var(--accent); text-decoration:none; font-weight:600 }
+
+    /* --- Carrusel (muestra 3 tarjetas visibles en pantallas grandes) --- */
+    .carousel-wrapper{ position:relative; margin-bottom:3rem; padding:1rem 0 }
+    .carousel-viewport{
+      overflow:hidden;
+      padding:0 .8rem;
+    }
+    .carousel{
+      display:flex;
+      gap:var(--gap);
+      transition: scroll-left .3s;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
     }
 
-    nav a:hover {
-      color: #00bfff;
+    /* Cada tarjeta del carrusel tendrá un ancho que permita 3 visibles */
+    .carousel .project-card{
+      flex:0 0 calc((100% - (var(--gap) * 2)) / 3); /* 3 tarjetas visibles, restando gaps */
+      min-width:0; /* para evitar overflow por contenidos largos */
     }
 
-    section {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: auto;
+    /* Botones */
+    .carousel-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:0;
+      background:rgba(0,0,0,0.55);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background .18s,transform .12s;
+      user-select:none;
+    }
+    .carousel-btn:hover{ background:rgba(0,191,255,0.85); transform:translateY(-50%) scale(1.03) }
+    .carousel-btn:active{ transform:translateY(-50%) scale(.98) }
+    .carousel-btn.left{ left:6px }
+    .carousel-btn.right{ right:6px }
+    .carousel-btn[disabled]{ opacity:.35; cursor:default; background:rgba(0,0,0,0.35) }
+
+    footer{
+      text-align:center;padding:1rem 0;background:#1a1a1a;color:var(--muted);
+      font-size:.9rem;margin-top:2rem;
     }
 
-    .about {
-      text-align: center;
+    /* Responsive: en pantallas medianas 2 visibles, en móviles 1 visible */
+    @media (max-width:960px){
+      .projects-grid{ grid-template-columns:repeat(2,1fr) }
+      .carousel .project-card{ flex:0 0 calc((100% - var(--gap)) / 2) } /* 2 visibles */
     }
 
-    .about p {
-      max-width: 700px;
-      margin: auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
+    @media (max-width:620px){
+      header h1{ font-size:1.6rem }
+      .projects-grid{ grid-template-columns:1fr; gap:1rem }
+      .project-card img{ height:160px }
+      .carousel .project-card{ flex:0 0 100% } /* 1 visible */
+      .carousel-btn{ width:38px;height:38px;font-size:18px }
+      .carousel-wrapper{ padding:0 }
     }
 
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      background: #1c1c1c;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(0,191,255,0.3);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .project-card .content {
-      padding: 1rem;
-    }
-
-    .project-card h3 {
-      margin-top: 0;
-    }
-
-    .project-card p {
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .project-card a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      color: #00bfff;
-      text-decoration: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #1a1a1a;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
   </style>
 </head>
 <body>
@@ -112,64 +151,190 @@
   <header>
     <h1>Manuel Martín</h1>
     <nav>
-      <a href="#about">About Me</a>
+      <a href="#about">About</a>
       <a href="#projects">Proyectos</a>
-      <a href="https://www.linkedin.com/in/tu-linkedin" target="_blank">LinkedIn</a>
-      <a href="https://tuusuario.itch.io/" target="_blank">Itch.io</a>
+      <a href="https://www.linkedin.com/in/tu-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://tuusuario.itch.io/" target="_blank" rel="noopener">Itch.io</a>
     </nav>
   </header>
 
   <section id="about" class="about">
     <h2>Sobre mí</h2>
     <p>
-      Soy diseñador y programador de videojuegos. Me apasiona crear experiencias interactivas que mezclen emoción y diseño inteligente. 
-      He trabajado en varios proyectos indie, aprendiendo a equilibrar jugabilidad, narrativa y estética.
+      Diseñador y programador de videojuegos con ganas de aprender y colaborar en proyectos indie. Me interesa mezclar jugabilidad, narrativa y estética clara.
     </p>
   </section>
 
   <section id="projects">
     <h2>Proyectos</h2>
-    <div class="projects">
-      <div class="project-card">
-        <img src="https://placehold.co/600x400?text=Underpacked" alt="Underpacked">
+
+    <!-- 3 tarjetas fijas (siempre visibles) -->
+    <div class="projects-grid" aria-hidden="false">
+      <article class="project-card">
+        <img src="https://placehold.co/800x500?text=Underpacked" alt="Underpacked - screenshot">
         <div class="content">
           <h3>Underpacked</h3>
-          <p>
-            Juego cooperativo local en el que los jugadores gestionan una nave espacial enviando paquetes y enfrentándose a oleadas de enemigos. 
-            Desarrollado en Unreal Engine 5.
-          </p>
-          <a href="https://tuusuario.itch.io/underpacked" target="_blank">Ver en Itch.io</a>
+          <p>Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. UE5.</p>
+          <a href="https://tuusuario.itch.io/underpacked" target="_blank" rel="noopener">Ver en Itch.io</a>
         </div>
-      </div>
+      </article>
 
-      <div class="project-card">
-        <img src="https://placehold.co/600x400?text=Rookie+Mistakes+Not+Allowed" alt="Rookie Mistakes Not Allowed">
+      <article class="project-card">
+        <img src="https://placehold.co/800x500?text=Rookie+Mistakes" alt="Rookie Mistakes - screenshot">
         <div class="content">
           <h3>Rookie Mistakes Not Allowed</h3>
-          <p>
-            Juego arcade donde cada error cuenta. Mezcla reflejos y estrategia para superar los desafíos. 
-            Inspirado en clásicos de habilidad con un toque moderno.
-          </p>
-          <a href="https://tuusuario.itch.io/rookie-mistakes-not-allowed" target="_blank">Ver en Itch.io</a>
+          <p>Arcade de precisión con mecánicas de riesgo/recompensa y diseño afilado.</p>
+          <a href="https://tuusuario.itch.io/rookie-mistakes-not-allowed" target="_blank" rel="noopener">Ver en Itch.io</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <img src="https://placehold.co/800x500?text=Juego+de+Cartas" alt="Juego de Cartas - screenshot">
+        <div class="content">
+          <h3>Juego de Cartas</h3>
+          <p>Táctico con baraja española: combina azar y decisiones estratégicas. Inspirado en Slay the Spire.</p>
+          <a href="https://tuusuario.itch.io/juego-de-cartas" target="_blank" rel="noopener">Ver en Itch.io</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Carrusel: muestra 3 visibles en desktop, 2 en tablet, 1 en móvil -->
+    <h3 style="text-align:center; margin:1.2rem 0 0.6rem 0">Más proyectos</h3>
+    <div class="carousel-wrapper" aria-label="Carrusel de proyectos">
+      <button class="carousel-btn left" id="btn-left" aria-label="Anterior" title="Anterior" type="button">&#10094;</button>
+
+      <div class="carousel-viewport">
+        <div class="carousel" id="carousel" role="list">
+          <!-- proyectos extra -->
+          <article class="project-card" role="listitem">
+            <img src="https://placehold.co/800x500?text=Unveiled" alt="Unveiled - screenshot">
+            <div class="content">
+              <h3>Unveiled</h3>
+              <p>Metroidvania sobre duelo y aceptación, mecánicas que cambian por etapas.</p>
+              <a href="https://tuusuario.itch.io/unveiled" target="_blank" rel="noopener">Ver en Itch.io</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <img src="https://placehold.co/800x500?text=PacMan+Maldito" alt="Pac-Man Maldito - screenshot">
+            <div class="content">
+              <h3>Pac-Man Maldito</h3>
+              <p>Híbrido terror/puzzle que corrompe la experiencia clásica con narrativa interactiva.</p>
+              <a href="https://tuusuario.itch.io/pacman-maldito" target="_blank" rel="noopener">Ver en Itch.io</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <img src="https://placehold.co/800x500?text=Oveja+Negra" alt="Oveja Negra - screenshot">
+            <div class="content">
+              <h3>Oveja Negra</h3>
+              <p>Brotato-like donde la oveja negra lucha contra hordas y mejora equipo entre oleadas.</p>
+              <a href="https://tuusuario.itch.io/oveja-negra" target="_blank" rel="noopener">Ver en Itch.io</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <img src="https://placehold.co/800x500?text=Carnaval+Jam" alt="Carnaval Jam - screenshot">
+            <div class="content">
+              <h3>Carnaval Jam</h3>
+              <p>Entrada para game jam con ritmo y humor inspirada en el carnaval de Madrid.</p>
+              <a href="https://tuusuario.itch.io/carnaval-jam" target="_blank" rel="noopener">Ver en Itch.io</a>
+            </div>
+          </article>
+
+          <!-- Añade más project-card aquí si quieres -->
         </div>
       </div>
 
-      <div class="project-card">
-        <img src="https://placehold.co/600x400?text=Juego+de+Cartas" alt="Juego de Cartas">
-        <div class="content">
-          <h3>Juego de Cartas</h3>
-          <p>
-            Un juego basado en la baraja española que combina estrategia y azar. Inspirado en títulos como Balatro y Slay the Spire.
-          </p>
-          <a href="https://tuusuario.itch.io/juego-de-cartas" target="_blank">Ver en Itch.io</a>
-        </div>
-      </div>
+      <button class="carousel-btn right" id="btn-right" aria-label="Siguiente" title="Siguiente" type="button">&#10095;</button>
     </div>
   </section>
 
   <footer>
     © 2025 Manuel Martín — Todos los derechos reservados
   </footer>
+
+  <script>
+    (function(){
+      const carousel = document.getElementById('carousel');
+      const btnLeft = document.getElementById('btn-left');
+      const btnRight = document.getElementById('btn-right');
+
+      // determina cuántas cartas son visibles según el ancho actual
+      function visibleCount() {
+        const w = window.innerWidth;
+        if (w <= 620) return 1;
+        if (w <= 960) return 2;
+        return 3;
+      }
+
+      // calcula desplazamiento por "paso" (ancho de una tarjeta + gap)
+      function stepDistance() {
+        const first = carousel.querySelector('.project-card');
+        if (!first) return carousel.clientWidth; // fallback
+        const style = getComputedStyle(carousel);
+        const gap = parseFloat(style.gap || style.columnGap || 0);
+        const rect = first.getBoundingClientRect();
+        return rect.width + gap;
+      }
+
+      function updateButtons() {
+        // deshabilita botones cuando estamos al inicio/fin
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        btnLeft.disabled = carousel.scrollLeft <= 5;
+        btnRight.disabled = carousel.scrollLeft >= maxScroll - 5;
+      }
+
+      // Scrolls by one card. Puedes cambiar multiplier a 3 si quieres que salte 3 a la vez.
+      function scrollByCards(direction = 1, multiplier = 1) {
+        const distance = stepDistance() * multiplier;
+        carousel.scrollBy({ left: distance * direction, behavior: 'smooth' });
+      }
+
+      // Eventos botones
+      btnLeft.addEventListener('click', () => { scrollByCards(-1, 1); });
+      btnRight.addEventListener('click', () => { scrollByCards(1, 1); });
+
+      // actualizar botones cuando se haga scroll (por drag o wheel)
+      carousel.addEventListener('scroll', () => { window.requestAnimationFrame(updateButtons); });
+
+      // recalcular al redimensionar
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // asegúrate de que el scrollLeft esté alineado a tarjetas (snap simple)
+          // opcional: podríamos alinear al múltiplo más cercano aquí
+          updateButtons();
+        }, 120);
+      });
+
+      // soporte para teclas Left/Right cuando el carrusel está enfocado
+      carousel.tabIndex = 0;
+      carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCards(1,1); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollByCards(-1,1); }
+      });
+
+      // inicialización final
+      updateButtons();
+
+      // opcional: hacer "snap" visual alineando al terminar de hacer scroll
+      let isScrolling;
+      carousel.addEventListener('scroll', () => {
+        window.clearTimeout(isScrolling);
+        isScrolling = setTimeout(() => {
+          // calculate closest multiple of stepDistance and snap to it
+          const step = stepDistance();
+          if (step <= 0) return;
+          const current = carousel.scrollLeft;
+          const nearest = Math.round(current / step) * step;
+          carousel.scrollTo({ left: nearest, behavior: 'smooth' });
+        }, 150);
+      });
+
+    })();
+  </script>
 
 </body>
 </html>
