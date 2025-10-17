@@ -67,29 +67,6 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* SECTIONS */
-main { flex: 1; }
-
-section {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px 60px;
-}
-
-h2 {
-  color: var(--accent);
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-#about p {
-  text-align: center;
-  line-height: 1.7;
-  opacity: 0.9;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
 /* CARRUSEL */
 .carousel-container {
   position: relative;
@@ -101,7 +78,12 @@ h2 {
 .carousel {
   display: flex;
   gap: var(--gap);
-  transition: transform 0.6s ease;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .project-card {
@@ -186,18 +168,14 @@ h2 {
   transform: translateY(-50%) scale(1.1);
 }
 
-#btnPrev { left: -70px; }
-#btnNext { right: -70px; }
+#btnPrev { left: 10px; }
+#btnNext { right: 10px; }
 
 @media (max-width: 960px) {
   .project-card { flex: 0 0 calc((100% - var(--gap)) / 2); }
-  #btnPrev { left: -50px; }
-  #btnNext { right: -50px; }
 }
 @media (max-width: 620px) {
   .project-card { flex: 0 0 100%; }
-  #btnPrev { left: -40px; }
-  #btnNext { right: -40px; }
 }
 
 /* FOOTER */
@@ -297,48 +275,25 @@ footer {
 <script>
 (function(){
   const carousel = document.getElementById('carousel');
-  const cards = document.querySelectorAll('.project-card');
   const btnPrev = document.getElementById('btnPrev');
   const btnNext = document.getElementById('btnNext');
-  let currentIndex = 0;
 
-  function visibleCount() {
-    const vw = window.innerWidth;
-    if (vw <= 620) return 1;
-    if (vw <= 960) return 2;
-    return 3;
+  // función para calcular el desplazamiento (el ancho de una tarjeta + gap)
+  function getScrollAmount() {
+    const card = carousel.querySelector('.project-card');
+    if (!card) return 300;
+    const style = getComputedStyle(carousel);
+    const gap = parseFloat(style.gap) || 24;
+    return card.offsetWidth + gap;
   }
 
-  function updateCarousel() {
-    const gap = parseFloat(getComputedStyle(carousel).gap) || 24;
-    const cardWidth = cards[0].offsetWidth + gap;
-    const shift = currentIndex * cardWidth;
-    carousel.style.transform = `translateX(-${shift}px)`;
-  }
+  btnNext.addEventListener('click', () => {
+    carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+  });
 
-  function next() {
-    const visible = visibleCount();
-    if (currentIndex < cards.length - visible) {
-      currentIndex++;
-    } else {
-      currentIndex = 0; // reinicia al inicio
-    }
-    updateCarousel();
-  }
-
-  function prev() {
-    const visible = visibleCount();
-    if (currentIndex > 0) {
-      currentIndex--;
-    } else {
-      currentIndex = cards.length - visible; // ir al final
-    }
-    updateCarousel();
-  }
-
-  btnNext.addEventListener('click', next);
-  btnPrev.addEventListener('click', prev);
-  window.addEventListener('resize', updateCarousel);
+  btnPrev.addEventListener('click', () => {
+    carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+  });
 })();
 </script>
 
