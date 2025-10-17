@@ -15,7 +15,6 @@
   --transition: 0.3s ease;
 }
 
-/* ===== RESET ===== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
@@ -32,7 +31,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   text-align: center;
   padding: 60px 20px 20px;
@@ -44,7 +43,7 @@ header h1 {
   margin-bottom: 18px;
 }
 
-/* ===== NAVIGATION ===== */
+/* NAVIGATION */
 nav {
   display: flex;
   justify-content: center;
@@ -68,10 +67,8 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* ===== SECTIONS ===== */
-main {
-  flex: 1;
-}
+/* SECTIONS */
+main { flex: 1; }
 
 section {
   max-width: 1000px;
@@ -93,7 +90,7 @@ h2 {
   margin: 0 auto;
 }
 
-/* ===== CARRUSEL ===== */
+/* CARRUSEL */
 .carousel-container {
   position: relative;
   width: 100%;
@@ -168,6 +165,7 @@ h2 {
 .project-info h3 {
   margin: 8px 0;
   font-size: 1.1rem;
+  color: #ff7474;
 }
 
 .project-info p {
@@ -183,7 +181,7 @@ h2 {
   text-underline-offset: 2px;
 }
 
-/* ===== BOTONES DE CARRUSEL ===== */
+/* BOTONES */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -218,7 +216,7 @@ h2 {
   #btnNext { right: -40px; }
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -257,6 +255,7 @@ footer {
       <button id="btnPrev" class="carousel-btn" aria-label="Anterior">❮</button>
 
       <div id="carousel" class="carousel" role="list">
+        <!-- Underpacked -->
         <article class="project-card" role="listitem">
           <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener" class="project-link">
             <div class="project-image">
@@ -270,27 +269,43 @@ footer {
           </a>
         </article>
 
+        <!-- Goofyathlon -->
         <article class="project-card" role="listitem">
-          <a href="https://example.com/juego2" target="_blank" rel="noopener" class="project-link">
+          <a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener" class="project-link">
             <div class="project-image">
-              <img src="img/game2_logo.png" alt="Cosmic Trails logo">
+              <img src="img/goofyathlon.png" alt="Goofyathlon logo">
             </div>
             <div class="project-info">
-              <h3>Cosmic Trails</h3>
-              <p>Explora galaxias perdidas en un viaje musical y visual con estética synthwave retro.</p>
+              <h3>Goofyathlon</h3>
+              <p>Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.</p>
               <span class="ver-link">Ver en Itch.io</span>
             </div>
           </a>
         </article>
 
+        <!-- Carnival Swap -->
         <article class="project-card" role="listitem">
-          <a href="https://example.com/juego3" target="_blank" rel="noopener" class="project-link">
+          <a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener" class="project-link">
             <div class="project-image">
-              <img src="img/game3_logo.png" alt="Wool You Fight logo">
+              <img src="img/carnival_swap.png" alt="Carnival Swap logo">
             </div>
             <div class="project-info">
-              <h3>Wool You Fight?</h3>
-              <p>Defiende al rebaño siendo la oveja negra en este shooter tipo survivors lleno de humor.</p>
+              <h3>Carnival Swap</h3>
+              <p>Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.</p>
+              <span class="ver-link">Ver en Itch.io</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Bubble Gum Royale -->
+        <article class="project-card" role="listitem">
+          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener" class="project-link">
+            <div class="project-image">
+              <img src="img/bubblegum_royale.png" alt="Bubble Gum Royale logo">
+            </div>
+            <div class="project-info">
+              <h3>Bubble Gum Royale</h3>
+              <p>Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena.</p>
               <span class="ver-link">Ver en Itch.io</span>
             </div>
           </a>
