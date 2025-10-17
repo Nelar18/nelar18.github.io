@@ -13,7 +13,6 @@
   --gap: 24px;
   --radius: 16px;
   --transition: 0.3s ease;
-  --card-width: 320px;
 }
 
 * {
@@ -92,8 +91,9 @@ section h2 {
   display: flex;
   gap: var(--gap);
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow: hidden;
   justify-content: center;
+  transition: transform 0.5s ease;
 }
 
 .project-card {
@@ -101,8 +101,7 @@ section h2 {
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  width: var(--card-width);
-  flex-shrink: 0;
+  flex: 0 0 calc((100% - (var(--gap) * 2)) / 3);
   display: flex;
   flex-direction: column;
   transition: transform var(--transition), box-shadow var(--transition);
@@ -156,7 +155,7 @@ section h2 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   border: none;
   color: var(--accent);
   font-size: 2rem;
@@ -179,19 +178,14 @@ section h2 {
 }
 
 /* RESPONSIVE */
-@media (max-width: 1024px) {
-  :root {
-    --card-width: 280px;
+@media (max-width: 960px) {
+  .project-card {
+    flex: 0 0 calc((100% - var(--gap)) / 2);
   }
 }
-@media (max-width: 768px) {
-  :root {
-    --card-width: 250px;
-  }
-}
-@media (max-width: 560px) {
-  :root {
-    --card-width: 90%;
+@media (max-width: 620px) {
+  .project-card {
+    flex: 0 0 100%;
   }
 }
 
@@ -291,39 +285,46 @@ footer {
 <footer>© 2025 Manuel Martín Martín</footer>
 
 <script>
-(function(){
+(function () {
   const carousel = document.getElementById("carousel");
   const btnPrev = document.getElementById("btnPrev");
   const btnNext = document.getElementById("btnNext");
 
   let currentIndex = 0;
 
-  function getCards() {
-    return Array.from(carousel.querySelectorAll(".project-card"));
+  function getVisibleCards() {
+    const vw = window.innerWidth;
+    if (vw <= 620) return 1;
+    if (vw <= 960) return 2;
+    return 3;
   }
 
-  function updateScroll() {
-    const cards = getCards();
-    const total = cards.length;
+  function scrollToIndex() {
+    const cards = carousel.querySelectorAll(".project-card");
     const cardWidth = cards[0].offsetWidth + 24;
-    carousel.scrollTo({ left: currentIndex * cardWidth, behavior: "smooth" });
+    carousel.scrollTo({
+      left: currentIndex * cardWidth,
+      behavior: "smooth",
+    });
   }
 
   btnNext.addEventListener("click", () => {
-    const cards = getCards();
+    const cards = carousel.querySelectorAll(".project-card");
+    const visible = getVisibleCards();
     const total = cards.length;
-    currentIndex = (currentIndex + 1) % total; // wrap-around adelante
-    updateScroll();
+    currentIndex = (currentIndex + visible) % total; // wrap hacia adelante
+    scrollToIndex();
   });
 
   btnPrev.addEventListener("click", () => {
-    const cards = getCards();
+    const cards = carousel.querySelectorAll(".project-card");
+    const visible = getVisibleCards();
     const total = cards.length;
-    currentIndex = (currentIndex - 1 + total) % total; // wrap-around atrás
-    updateScroll();
+    currentIndex = (currentIndex - visible + total) % total; // wrap hacia atrás
+    scrollToIndex();
   });
 
-  window.addEventListener("resize", updateScroll);
+  window.addEventListener("resize", scrollToIndex);
 })();
 </script>
 </body>
