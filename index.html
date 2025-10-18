@@ -63,6 +63,23 @@ nav{display:flex;align-items:center;gap:18px}
 }
 .nav-link:hover{background:var(--accent);color:#fff}
 
+/* botón CV */
+.cv-button{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  font-weight:600;
+  padding:8px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:background var(--transition),transform var(--transition);
+  text-decoration:none;
+}
+.cv-button:hover{
+  background:#0090cc;
+  transform:translateY(-2px);
+}
+
 /* dropdown base */
 .dropdown{
   position:absolute;
@@ -112,9 +129,24 @@ section h2{
 }
 .project-item:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,191,255,0.25)}
 
-/* imagen: usar height 100% y width auto para NO hacer zoom out ni estirar */
-.project-image{flex:0 0 180px;height:120px;background:#0f1115;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.project-image img{ height:100%; width:auto; max-width:100%; object-fit:contain; display:block; }
+/* imagen */
+.project-image{
+  flex:0 0 180px;
+  height:120px;
+  background:#0f1115;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.project-image img{
+  height:100%;
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
+  display:block;
+}
 
 /* contenido del proyecto */
 .project-content{flex:1}
@@ -148,19 +180,19 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <a id="nav-about" class="nav-link" href="#about">About Me</a>
     </div>
 
-    <!-- Proyectos (desplegable por clic) -->
+    <!-- Proyectos -->
     <div class="nav-item">
       <button id="projects-btn" class="nav-link">Proyectos ▾</button>
       <div id="projects-dropdown" class="dropdown" aria-hidden="true">
         <a id="dropdown-all" href="#projects">Ver todos</a>
-        <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener">Underpacked</a>
-        <a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener">Goofyathlon</a>
-        <a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener">Carnival Swap</a>
-        <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener">Bubble Gum Royale</a>
+        <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a>
+        <a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a>
+        <a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a>
+        <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
       </div>
     </div>
 
-    <!-- Idioma (globo + desplegable) -->
+    <!-- Idioma -->
     <div class="nav-item">
       <button id="lang-btn" class="nav-link">🌐 Idioma ▾</button>
       <div id="lang-dropdown" class="dropdown" aria-hidden="true">
@@ -168,6 +200,9 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <button data-lang="en">English 🇬🇧</button>
       </div>
     </div>
+
+    <!-- 📄 BOTÓN DESCARGAR CV -->
+    <a href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 CV</a>
   </nav>
 </header>
 
@@ -187,12 +222,12 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <!-- Underpacked -->
       <div class="project-item">
         <div class="project-image">
-          <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener">
+          <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">
             <img src="img/UnderPackedLogo.jpg" alt="Underpacked">
           </a>
         </div>
         <div class="project-content">
-          <h3><a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener">Underpacked</a></h3>
+          <h3><a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a></h3>
           <p id="desc-underpacked">Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.</p>
         </div>
       </div>
@@ -200,12 +235,12 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <!-- Bubble Gum Royale -->
       <div class="project-item">
         <div class="project-image">
-          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener">
+          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">
             <img src="img/BubbleGumRoyale.png" alt="Bubble Gum Royale">
           </a>
         </div>
         <div class="project-content">
-          <h3><a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener">Bubble Gum Royale</a></h3>
+          <h3><a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a></h3>
           <p id="desc-bubblegum">Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena.</p>
         </div>
       </div>
@@ -213,12 +248,12 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <!-- Goofyathlon -->
       <div class="project-item">
         <div class="project-image">
-          <a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener">
+          <a href="https://eddricman.itch.io/goofyathlon" target="_blank">
             <img src="img/GoofyAthlon.png" alt="Goofyathlon">
           </a>
         </div>
         <div class="project-content">
-          <h3><a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener">Goofyathlon</a></h3>
+          <h3><a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a></h3>
           <p id="desc-goofyathlon">Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.</p>
         </div>
       </div>
@@ -226,17 +261,15 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <!-- Carnival Swap -->
       <div class="project-item">
         <div class="project-image">
-          <a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener">
+          <a href="https://nelar.itch.io/carnival-swap" target="_blank">
             <img src="img/CarnivalSwap.png" alt="Carnival Swap">
           </a>
         </div>
         <div class="project-content">
-          <h3><a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener">Carnival Swap</a></h3>
+          <h3><a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a></h3>
           <p id="desc-carnival">Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.</p>
         </div>
       </div>
-
-
     </div>
   </section>
 </main>
@@ -244,85 +277,82 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 <footer>© 2025 Manuel Martín Martín</footer>
 
 <script>
-/* Toggle dropdowns con clic (no con hover). Mantener accesible y cerrar al click fuera */
-const projectsBtn = document.getElementById('projects-btn');
-const projectsDropdown = document.getElementById('projects-dropdown');
-projectsBtn.addEventListener('click', (e)=>{
+/* Dropdown toggle */
+const projectsBtn=document.getElementById('projects-btn');
+const projectsDropdown=document.getElementById('projects-dropdown');
+const langBtn=document.getElementById('lang-btn');
+const langDropdown=document.getElementById('lang-dropdown');
+
+projectsBtn.addEventListener('click',e=>{
   e.stopPropagation();
-  const shown = projectsDropdown.style.display === 'flex';
-  projectsDropdown.style.display = shown ? 'none' : 'flex';
-  projectsDropdown.style.flexDirection = 'column';
-  // cerrar otro dropdown si está abierto
-  langDropdown.style.display = 'none';
+  const show=projectsDropdown.style.display==='flex';
+  projectsDropdown.style.display=show?'none':'flex';
+  projectsDropdown.style.flexDirection='column';
+  langDropdown.style.display='none';
 });
 
-const langBtn = document.getElementById('lang-btn');
-const langDropdown = document.getElementById('lang-dropdown');
-langBtn.addEventListener('click', (e)=>{
+langBtn.addEventListener('click',e=>{
   e.stopPropagation();
-  const shown = langDropdown.style.display === 'flex';
-  langDropdown.style.display = shown ? 'none' : 'flex';
-  langDropdown.style.flexDirection = 'column';
-  projectsDropdown.style.display = 'none';
+  const show=langDropdown.style.display==='flex';
+  langDropdown.style.display=show?'none':'flex';
+  langDropdown.style.flexDirection='column';
+  projectsDropdown.style.display='none';
 });
 
-// cerrar al clicar fuera
-document.addEventListener('click', ()=>{
-  projectsDropdown.style.display = 'none';
-  langDropdown.style.display = 'none';
+document.addEventListener('click',()=>{
+  projectsDropdown.style.display='none';
+  langDropdown.style.display='none';
 });
 
-/* Traducción dinámica (restaurada para todas las descripciones) */
-const texts = {
-  es: {
-    navAbout: "Sobre mí",
-    projectsBtn: "Proyectos ▾",
-    langBtn: "🌐 Idioma ▾",
-    aboutTitle: "Sobre mí",
-    aboutText: "Soy diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables. Trabajo con Unreal Engine y Godot, diseñando niveles que guían al jugador de forma intuitiva.",
-    projectsTitle: "Proyectos",
-    underpacked: "Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.",
-    goofyathlon: "Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.",
-    carnival: "Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.",
-    bubblegum: "Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena."
+/* Traducción dinámica */
+const texts={
+  es:{
+    navAbout:"Sobre mí",
+    projectsBtn:"Proyectos ▾",
+    langBtn:"🌐 Idioma ▾",
+    aboutTitle:"Sobre mí",
+    aboutText:"Soy Manuel Martín diseñador de videojuegos con un Máster en Diseño de Videojuegos. Tengo experiencia trabajando con Unreal Engine, Unity y Godot, y una sólida base en programación. He participado en numerosos proyectos personales y de game jams, varios de los cuales han sido premiados.",
+    projectsTitle:"Proyectos",
+    underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.",
+    goofyathlon:"Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.",
+    carnival:"Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.",
+    bubblegum:"Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena."
   },
-  en: {
-    navAbout: "About Me",
-    projectsBtn: "Projects ▾",
-    langBtn: "🌐 Language ▾",
-    aboutTitle: "About Me",
-    aboutText: "I'm a video game designer and programmer passionate about creating interactive worlds, balanced systems and memorable experiences. I work with Unreal Engine and Godot, designing levels that guide the player intuitively.",
-    projectsTitle: "Projects",
-    underpacked: "Local co-op where you manage a spaceship and send packages while defending the cockpit. Developed in Unreal Engine 5.",
-    goofyathlon: "Compete in hilarious multiplayer athletic challenges full of chaos and fun.",
-    carnival: "Local competitive game where you swap abilities to win in carnival mini-games.",
-    bubblegum: "Fight on a spinning cookie and avoid falling into the void in this colorful battle arena."
+  en:{
+    navAbout:"About Me",
+    projectsBtn:"Projects ▾",
+    langBtn:"🌐 Language ▾",
+    aboutTitle:"About Me",
+    aboutText:"I’m Manuel Martín, a game designer with a Master’s degree in Game Design. I have experience working with Unreal Engine, Unity, and Godot, and a strong background in programming. I’ve participated in numerous personal and game jam projects, several of which have won awards.",
+    projectsTitle:"Projects",
+    underpacked:"Local co-op where you manage a spaceship and send packages while defending the cockpit. Developed in Unreal Engine 5.",
+    goofyathlon:"Compete in hilarious multiplayer athletic challenges full of chaos and fun.",
+    carnival:"Local competitive game where you swap abilities to win in carnival mini-games.",
+    bubblegum:"Fight on a spinning cookie and avoid falling into the void in this colorful battle arena."
   }
 };
 
 document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
-  btn.addEventListener('click', (e)=>{
-    const lang = btn.dataset.lang;
+  btn.addEventListener('click',()=>{
+    const lang=btn.dataset.lang;
     applyLanguage(lang);
-    langDropdown.style.display = 'none';
+    langDropdown.style.display='none';
   });
 });
 
 function applyLanguage(lang){
-  const t = texts[lang] || texts.es;
-  document.getElementById('nav-about').textContent = t.navAbout;
-  document.getElementById('projects-btn').textContent = t.projectsBtn;
-  document.getElementById('lang-btn').textContent = t.langBtn;
-  document.getElementById('about-title').textContent = t.aboutTitle;
-  document.getElementById('about-text').textContent = t.aboutText;
-  document.getElementById('projects-title').textContent = t.projectsTitle;
-  document.getElementById('desc-underpacked').textContent = t.underpacked;
-  document.getElementById('desc-goofyathlon').textContent = t.goofyathlon;
-  document.getElementById('desc-carnival').textContent = t.carnival;
-  document.getElementById('desc-bubblegum').textContent = t.bubblegum;
+  const t=texts[lang]||texts.es;
+  document.getElementById('nav-about').textContent=t.navAbout;
+  document.getElementById('projects-btn').textContent=t.projectsBtn;
+  document.getElementById('lang-btn').textContent=t.langBtn;
+  document.getElementById('about-title').textContent=t.aboutTitle;
+  document.getElementById('about-text').textContent=t.aboutText;
+  document.getElementById('projects-title').textContent=t.projectsTitle;
+  document.getElementById('desc-underpacked').textContent=t.underpacked;
+  document.getElementById('desc-goofyathlon').textContent=t.goofyathlon;
+  document.getElementById('desc-carnival').textContent=t.carnival;
+  document.getElementById('desc-bubblegum').textContent=t.bubblegum;
 }
-
-/* Inicializar idioma por defecto (es) */
 applyLanguage('es');
 </script>
 </body>
