@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portfolio - Manuel Martín Martín</title>
+<style>
+:root{
+  --bg:#393E4D;
+  --header-bg:#17191e;
+  --panel:#17191e;
+  --accent:#00bfff;
+  --text:#f3f4f6;
+  --radius:14px;
+  --transition:0.3s ease;
+}
+
+/* reset */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding-top:80px; /* espacio para header fijo */
+  scroll-behavior:smooth;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* HEADER (fijo) */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:var(--header-bg);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 36px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.6);
+  z-index:1000;
+}
+header h1{
+  font-size:1.6rem;
+  color:var(--accent);
+  font-weight:600;
+}
+
+/* nav */
+nav{display:flex;align-items:center;gap:18px}
+
+/* links botón estilo */
+.nav-item{position:relative}
+.nav-link{
+  background:none;border:0;color:var(--text);font:inherit;
+  cursor:pointer;padding:8px 12px;border-radius:10px;
+  transition:background var(--transition),color var(--transition);
+  text-decoration:none;
+}
+.nav-link:hover{background:var(--accent);color:#fff}
+
+/* dropdown base */
+.dropdown{
+  position:absolute;
+  top:110%;
+  right:0;
+  background:var(--panel);
+  border-radius:var(--radius);
+  box-shadow:0 8px 22px rgba(0,0,0,0.45);
+  display:none;
+  flex-direction:column;
+  min-width:200px;
+  z-index:1001;
+}
+.dropdown a, .dropdown button{
+  color:var(--text);
+  text-decoration:none;
+  background:none;
+  border:none;
+  text-align:left;
+  padding:10px 14px;
+  cursor:pointer;
+  font:inherit;
+}
+.dropdown a:hover, .dropdown button:hover{background:var(--accent);color:#fff}
+
+/* main centrado */
+main{
+  flex:1;
+  width:100%;
+  max-width:1000px;
+  margin:0 auto;
+  padding:40px 20px;
+  text-align:left;
+}
+section{width:100%;margin-bottom:60px}
+section h2{
+  text-align:center;margin-bottom:28px;color:var(--accent);font-size:1.8rem;
+}
+
+/* proyectos - lista */
+.project-list{display:flex;flex-direction:column;gap:26px}
+.project-item{
+  display:flex;align-items:center;gap:20px;
+  background:var(--panel);border-radius:var(--radius);
+  box-shadow:0 6px 16px rgba(0,0,0,0.45);padding:18px;
+  transition:transform var(--transition),box-shadow var(--transition);
+}
+.project-item:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,191,255,0.25)}
+
+/* imagen: usar height 100% y width auto para NO hacer zoom out ni estirar */
+.project-image{flex:0 0 180px;height:120px;background:#0f1115;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.project-image img{ height:100%; width:auto; max-width:100%; object-fit:contain; display:block; }
+
+/* contenido del proyecto */
+.project-content{flex:1}
+.project-content h3{font-size:1.15rem;color:var(--accent);margin-bottom:6px}
+.project-content p{font-size:0.95rem;opacity:0.9;line-height:1.45;margin-bottom:6px}
+.project-content a{color:#00BFFF;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* responsive */
+@media (max-width:880px){
+  .project-image{flex:0 0 150px;height:100px}
+}
+@media (max-width:640px){
+  header{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 18px}
+  .project-item{flex-direction:column;text-align:center}
+  .project-image{width:100%;height:180px}
+}
+
+/* footer */
+footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:1px solid rgba(255,255,255,0.04)}
+</style>
+</head>
+<body>
+
+<!-- HEADER FIJO -->
+<header>
+  <h1>Manuel Martín Martín</h1>
+
+  <nav>
+    <!-- About -->
+    <div class="nav-item">
+      <a id="nav-about" class="nav-link" href="#about">About Me</a>
+    </div>
+
+    <!-- Proyectos (desplegable por clic) -->
+    <div class="nav-item">
+      <button id="projects-btn" class="nav-link">Proyectos ▾</button>
+      <div id="projects-dropdown" class="dropdown" aria-hidden="true">
+        <a id="dropdown-all" href="#projects">Ver todos</a>
+        <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener">Underpacked</a>
+        <a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener">Goofyathlon</a>
+        <a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener">Carnival Swap</a>
+        <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener">Bubble Gum Royale</a>
+      </div>
+    </div>
+
+    <!-- Idioma (globo + desplegable) -->
+    <div class="nav-item">
+      <button id="lang-btn" class="nav-link">🌐 Idioma ▾</button>
+      <div id="lang-dropdown" class="dropdown" aria-hidden="true">
+        <button data-lang="es">Español 🇪🇸</button>
+        <button data-lang="en">English 🇬🇧</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- CONTENIDO -->
+<main>
+  <section id="about">
+    <h2 id="about-title">About Me</h2>
+    <p id="about-text" style="max-width:820px;margin:0 auto;text-align:center;line-height:1.6">
+      Soy diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables. Trabajo con Unreal Engine y Godot, diseñando niveles que guían al jugador de forma intuitiva.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2 id="projects-title">Proyectos</h2>
+    <div class="project-list">
+
+      <!-- Underpacked -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener">
+            <img src="img/UnderPackedLogo.jpg" alt="Underpacked">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" rel="noopener">Underpacked</a></h3>
+          <p id="desc-underpacked">Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.</p>
+        </div>
+      </div>
+
+      <!-- Bubble Gum Royale -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener">
+            <img src="img/BubbleGumRoyale.png" alt="Bubble Gum Royale">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" rel="noopener">Bubble Gum Royale</a></h3>
+          <p id="desc-bubblegum">Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena.</p>
+        </div>
+      </div>
+
+      <!-- Goofyathlon -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener">
+            <img src="img/GoofyAthlon.png" alt="Goofyathlon">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://eddricman.itch.io/goofyathlon" target="_blank" rel="noopener">Goofyathlon</a></h3>
+          <p id="desc-goofyathlon">Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.</p>
+        </div>
+      </div>
+
+      <!-- Carnival Swap -->
+      <div class="project-item">
+        <div class="project-image">
+          <a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener">
+            <img src="img/CarnivalSwap.png" alt="Carnival Swap">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3><a href="https://nelar.itch.io/carnival-swap" target="_blank" rel="noopener">Carnival Swap</a></h3>
+          <p id="desc-carnival">Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.</p>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+</main>
+
+<footer>© 2025 Manuel Martín Martín</footer>
+
+<script>
+/* Toggle dropdowns con clic (no con hover). Mantener accesible y cerrar al click fuera */
+const projectsBtn = document.getElementById('projects-btn');
+const projectsDropdown = document.getElementById('projects-dropdown');
+projectsBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  const shown = projectsDropdown.style.display === 'flex';
+  projectsDropdown.style.display = shown ? 'none' : 'flex';
+  projectsDropdown.style.flexDirection = 'column';
+  // cerrar otro dropdown si está abierto
+  langDropdown.style.display = 'none';
+});
+
+const langBtn = document.getElementById('lang-btn');
+const langDropdown = document.getElementById('lang-dropdown');
+langBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  const shown = langDropdown.style.display === 'flex';
+  langDropdown.style.display = shown ? 'none' : 'flex';
+  langDropdown.style.flexDirection = 'column';
+  projectsDropdown.style.display = 'none';
+});
+
+// cerrar al clicar fuera
+document.addEventListener('click', ()=>{
+  projectsDropdown.style.display = 'none';
+  langDropdown.style.display = 'none';
+});
+
+/* Traducción dinámica (restaurada para todas las descripciones) */
+const texts = {
+  es: {
+    navAbout: "Sobre mí",
+    projectsBtn: "Proyectos ▾",
+    langBtn: "🌐 Idioma ▾",
+    aboutTitle: "Sobre mí",
+    aboutText: "Soy diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables. Trabajo con Unreal Engine y Godot, diseñando niveles que guían al jugador de forma intuitiva.",
+    projectsTitle: "Proyectos",
+    underpacked: "Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.",
+    goofyathlon: "Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.",
+    carnival: "Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.",
+    bubblegum: "Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena."
+  },
+  en: {
+    navAbout: "About Me",
+    projectsBtn: "Projects ▾",
+    langBtn: "🌐 Language ▾",
+    aboutTitle: "About Me",
+    aboutText: "I'm a video game designer and programmer passionate about creating interactive worlds, balanced systems and memorable experiences. I work with Unreal Engine and Godot, designing levels that guide the player intuitively.",
+    projectsTitle: "Projects",
+    underpacked: "Local co-op where you manage a spaceship and send packages while defending the cockpit. Developed in Unreal Engine 5.",
+    goofyathlon: "Compete in hilarious multiplayer athletic challenges full of chaos and fun.",
+    carnival: "Local competitive game where you swap abilities to win in carnival mini-games.",
+    bubblegum: "Fight on a spinning cookie and avoid falling into the void in this colorful battle arena."
+  }
+};
+
+document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    const lang = btn.dataset.lang;
+    applyLanguage(lang);
+    langDropdown.style.display = 'none';
+  });
+});
+
+function applyLanguage(lang){
+  const t = texts[lang] || texts.es;
+  document.getElementById('nav-about').textContent = t.navAbout;
+  document.getElementById('projects-btn').textContent = t.projectsBtn;
+  document.getElementById('lang-btn').textContent = t.langBtn;
+  document.getElementById('about-title').textContent = t.aboutTitle;
+  document.getElementById('about-text').textContent = t.aboutText;
+  document.getElementById('projects-title').textContent = t.projectsTitle;
+  document.getElementById('desc-underpacked').textContent = t.underpacked;
+  document.getElementById('desc-goofyathlon').textContent = t.goofyathlon;
+  document.getElementById('desc-carnival').textContent = t.carnival;
+  document.getElementById('desc-bubblegum').textContent = t.bubblegum;
+}
+
+/* Inicializar idioma por defecto (es) */
+applyLanguage('es');
+</script>
+</body>
+</html>
