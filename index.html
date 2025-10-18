@@ -79,6 +79,9 @@ nav{display:flex;align-items:center;gap:18px}
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+section {
+  scroll-margin-top: 100px; /* ajusta este valor según la altura del header */
+}
 
 /* links */
 .nav-item{position:relative}
@@ -120,6 +123,7 @@ main{
 }
 section{width:100%;margin-bottom:60px}
 section h2{text-align:center;margin-bottom:28px;color:var(--accent);font-size:1.8rem;}
+section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;}
 
 /* proyectos */
 .project-list{display:flex;flex-direction:column;gap:26px}
@@ -210,7 +214,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 
   <nav>
     <div class="nav-item">
-      <a id="nav-about" class="nav-link" href="#about">About Me</a>
+      <a id="nav-about" class="nav-link" href="aboutme.html">About Me</a>
     </div>
 
     <div class="nav-item">
@@ -218,9 +222,9 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <div id="projects-dropdown" class="dropdown" aria-hidden="true">
         <a id="dropdown-all" href="#projects">Ver todos</a>
         <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a>
+        <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
         <a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a>
         <a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a>
-        <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
       </div>
     </div>
 
@@ -239,7 +243,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 <main>
   <section id="about">
     <h2 id="about-title">About Me</h2>
-    <p id="about-text" style="max-width:820px;margin:0 auto;text-align:center;line-height:1.6">
+    <p id="about-text" style="max-width:820px;margin:0 auto;text-align:justify;line-height:1.6">
       Soy diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables. Trabajo con Unreal Engine y Godot, diseñando niveles que guían al jugador de forma intuitiva.
     </p>
   </section>
@@ -322,6 +326,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 <footer>© 2025 Manuel Martín Martín</footer>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
 /* Dropdown toggle */
 const projectsBtn=document.getElementById('projects-btn');
 const projectsDropdown=document.getElementById('projects-dropdown');
@@ -352,7 +357,7 @@ const texts={
     navAbout:"Sobre mí",
     projectsBtn:"Proyectos ▾",
     langBtn:"🌐 Idioma ▾",
-    aboutTitle:"Sobre mí",
+    aboutTitle:"Bienvendio a mi web :D",
     aboutText:"Soy Manuel Martín diseñador de videojuegos con un Máster en Diseño de Videojuegos. Tengo experiencia trabajando con Unreal Engine, Unity y Godot, y una sólida base en programación. He participado en numerosos proyectos personales y de game jams, varios de los cuales han sido premiados.",
     projectsTitle:"Proyectos",
     underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
@@ -364,7 +369,7 @@ const texts={
     navAbout:"About Me",
     projectsBtn:"Projects ▾",
     langBtn:"🌐 Language ▾",
-    aboutTitle:"About Me",
+    aboutTitle:"Welcome to my website :D",
     aboutText:"I’m Manuel Martín, a game designer with a Master’s degree in Game Design. I have experience working with Unreal Engine, Unity, and Godot, and a strong background in programming. I’ve participated in numerous personal and game jam projects, several of which have won awards.",
     projectsTitle:"Projects",
     underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself.",
@@ -377,6 +382,7 @@ const texts={
 document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const lang=btn.dataset.lang;
+    localStorage.setItem('selectedLang', lang);
     applyLanguage(lang);
     langDropdown.style.display='none';
   });
@@ -384,18 +390,21 @@ document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
 
 function applyLanguage(lang){
   const t=texts[lang]||texts.es;
-  document.getElementById('nav-about').textContent=t.navAbout;
-  document.getElementById('projects-btn').textContent=t.projectsBtn;
+  if(document.getElementById('nav-about')) document.getElementById('nav-about').textContent=t.navAbout;
+  if(document.getElementById('projects-btn')) document.getElementById('projects-btn').textContent=t.projectsBtn;
   document.getElementById('lang-btn').textContent=t.langBtn;
-  document.getElementById('about-title').textContent=t.aboutTitle;
-  document.getElementById('about-text').textContent=t.aboutText;
-  document.getElementById('projects-title').textContent=t.projectsTitle;
-  document.getElementById('desc-underpacked').textContent=t.underpacked;
-  document.getElementById('desc-goofyathlon').textContent=t.goofyathlon;
-  document.getElementById('desc-carnival').textContent=t.carnival;
-  document.getElementById('desc-bubblegum').textContent=t.bubblegum;
+  if(document.getElementById('about-title')) document.getElementById('about-title').textContent=t.aboutTitle;
+  if(document.getElementById('about-text')) document.getElementById('about-text').textContent=t.aboutText;
+  if(document.getElementById('projects-title')) document.getElementById('projects-title').textContent=t.projectsTitle;
+  if(document.getElementById('desc-underpacked')) document.getElementById('desc-underpacked').textContent=t.underpacked;
+  if(document.getElementById('desc-goofyathlon')) document.getElementById('desc-goofyathlon').textContent=t.goofyathlon;
+  if(document.getElementById('desc-carnival'))document.getElementById('desc-carnival').textContent=t.carnival;
+  if(document.getElementById('desc-bubblegum'))document.getElementById('desc-bubblegum').textContent=t.bubblegum;
 }
-applyLanguage('es');
+
+const savedLang = localStorage.getItem('selectedLang') || 'es';
+applyLanguage(savedLang);
+});
 </script>
 </body>
 </html>

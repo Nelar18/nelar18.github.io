@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sobre mí - Manuel Martín Martín</title>
+<style>
+:root{
+  --bg:#393E4D;
+  --header-bg:#17191e;
+  --panel:#17191e;
+  --accent:#00bfff;
+  --text:#f3f4f6;
+  --radius:14px;
+  --transition:0.3s ease;
+}
+
+/* reset */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding-top:80px;
+  scroll-behavior:smooth;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  background:var(--header-bg);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 36px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.6);
+  z-index:1000;
+}
+header h1{font-size:1.6rem;color:var(--accent);font-weight:600;}
+.header-left {
+  display:flex;align-items:center;gap:12px;
+}
+nav{display:flex;align-items:center;gap:18px}
+
+/* Social Links */
+.social-icons {
+  display:flex;align-items:center;gap:10px;
+}
+.social-icons a {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  overflow:hidden;background:rgba(255,255,255,0.05);
+  transition:transform 0.25s ease,background 0.25s ease;
+}
+.social-icons a:hover {
+  background:var(--accent);
+  transform:scale(1.1);
+}
+.social-icons img {
+  width:30px;height:30px;
+  filter:brightness(0) invert(1);
+}
+
+/* Links y botones */
+.nav-item{position:relative}
+.nav-link{
+  background:none;border:0;color:var(--text);font:inherit;
+  cursor:pointer;padding:8px 12px;border-radius:10px;
+  transition:background var(--transition),color var(--transition);
+  text-decoration:none;
+}
+.nav-link:hover{background:var(--accent);color:#fff}
+
+/* botón CV */
+.cv-button{
+  background:var(--accent);color:#fff;border:none;font-weight:600;
+  padding:8px 14px;border-radius:10px;cursor:pointer;
+  transition:background var(--transition),transform var(--transition);
+  text-decoration:none;
+}
+.cv-button:hover{background:#0090cc;transform:translateY(-2px);}
+
+/* dropdown */
+.dropdown{
+  position:absolute;top:110%;right:0;
+  background:var(--panel);
+  border-radius:var(--radius);
+  box-shadow:0 8px 22px rgba(0,0,0,0.45);
+  display:none;flex-direction:column;min-width:200px;z-index:1001;
+}
+.dropdown a, .dropdown button{
+  color:var(--text);text-decoration:none;background:none;border:none;
+  text-align:left;padding:10px 14px;cursor:pointer;font:inherit;
+}
+.dropdown a:hover, .dropdown button:hover{background:var(--accent);color:#fff}
+
+/* main */
+main{
+  flex:1;width:100%;max-width:1350px;margin:0 auto;
+  padding:40px 24px;text-align:left;
+}
+
+section{margin-bottom:40px;}
+section h2{text-align:center;margin-bottom:24px;color:var(--accent);font-size:2.8rem;}
+section p{line-height:1.6;margin-bottom:20px;text-align:justify; font-size: 1.8rem;}
+
+hr{
+  border:0;
+  height:1px;
+  background:rgba(255,255,255,0.1);
+  margin:40px 0;
+}
+
+/* responsive */
+@media (max-width:640px){
+  header{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 18px}
+  .social-icons {margin-left:0;margin-top:6px;}
+}
+
+/* footer */
+footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:1px solid rgba(255,255,255,0.04)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Manuel Martín</h1>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/nelar/" target="_blank"><img src="img/LinkedinIcon.png" alt="LinkedIn"></a>
+      <a href="https://nelar.itch.io/" target="_blank"><img src="img/ItchioIcon.png" alt="Itch.io"></a>
+    </div>
+  </div>
+
+  <nav>
+    <div class="nav-item">
+      <a id="nav-home" href="index.html" class="nav-link">Inicio</a>
+    </div>
+    <div class="nav-item">
+      <a id="nav-projects" href="projects.html" class="nav-link">Proyectos</a>
+    </div>
+    <div class="nav-item">
+      <button id="lang-btn" class="nav-link">🌐 Idioma ▾</button>
+      <div id="lang-dropdown" class="dropdown" aria-hidden="true">
+        <button data-lang="es">Español 🇪🇸</button>
+        <button data-lang="en">English 🇬🇧</button>
+      </div>
+    </div>
+    <a href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 CV</a>
+  </nav>
+</header>
+
+<main>
+  <section id="about">
+    <h2 id="about-title">Sobre mí</h2>
+
+    <p id="section1">
+      Desde pequeño siempre me ha encantado jugar a videojuegos. En el instituto, durante las clases de informática,
+      empecé a crear mis primeros juegos, y desde entonces no he dejado de hacer pequeñas cosas. 
+      Ver a la gente disfrutar jugando mis proyectos, ya sea en game jams, proyectos personales o incluso en juegos comerciales,
+      me ha reafirmado que lo que más me gusta es hacer que la gente se lo pase bien jugando.
+    </p>
+
+    <hr>
+
+    <p id="section2">
+      Este mundo me apasiona y siempre estoy investigando cosas nuevas para trastear. Ya sea aprendiendo a crear shaders
+      (aunque a veces no salgan del todo bien 😅), explorando nuevas ideas de programación o ideando conceptos originales de juego,
+      disfruto muchísimo del proceso creativo y técnico que hay detrás de cada proyecto.
+    </p>
+
+    <hr>
+
+    <p id="section3">
+      Fuera del desarrollo, me encanta hacer deporte, especialmente los deportes de equipo, aunque también disfruto mucho entrenar por mi cuenta.
+      Además, me gusta cocinar y de vez en cuando dibujar — son formas diferentes de seguir creando y desconectar un poco del ordenador.
+    </p>
+
+  </section>
+</main>
+
+<footer>© 2025 Manuel Martín Martín</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const langBtn = document.getElementById('lang-btn');
+  const langDropdown = document.getElementById('lang-dropdown');
+
+  langBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const show = langDropdown.style.display === 'flex';
+    langDropdown.style.display = show ? 'none' : 'flex';
+    langDropdown.style.flexDirection = 'column';
+  });
+  document.addEventListener('click', () => { langDropdown.style.display = 'none'; });
+
+  /* Traducción */
+  const texts = {
+    es: {
+      navHome: "Inicio",
+      navProjects: "Proyectos",
+      langBtn: "🌐 Idioma ▾",
+      aboutTitle: "Sobre mí",
+      section1: "Desde pequeño siempre me ha encantado jugar a videojuegos. En el instituto, durante las clases de informática, empecé a crear mis primeros juegos, y desde entonces no he dejado de hacer pequeñas cosas. Ver a la gente disfrutar jugando mis proyectos, ya sea en game jams, proyectos personales o incluso en juegos comerciales, me ha reafirmado que lo que más me gusta es hacer que la gente se lo pase bien jugando.",
+      section2: "Este mundo me apasiona y siempre estoy investigando cosas nuevas para trastear. Ya sea aprendiendo a crear shaders (aunque a veces no me salgan del todo bien), explorando nuevas formas de programar o ideando juegos nuevos para hacer, disfruto muchísimo del proceso creativo y técnico que hay detrás de cada proyecto.",
+      section3: "Fuera del desarrollo, me encanta hacer deporte, especialmente los deportes de equipo, aunque también disfruto mucho entrenar por mi cuenta. Además, me gusta cocinar y de vez en cuando dibujar, son formas diferentes de seguir creando y desconectar un poco del ordenador."
+    },
+    en: {
+      navHome: "Home",
+      navProjects: "Projects",
+      langBtn: "🌐 Language ▾",
+      aboutTitle: "About Me",
+      section1: "Since I was a child, I’ve always loved playing video games. In high school, during computer science classes, I started creating my first games, and I haven’t stopped tinkering ever since. Seeing people enjoy my projects, whether in game jams, personal works, or even commercial games, has reaffirmed that what I love most is making people have fun through my games.",
+      section2: "I’m passionate about this world and I’m always exploring new things to experiment with. Whether it’s learning to create shaders (even if they don’t always turn out great), discovering new ways to program, or coming up with new game ideas, I truly enjoy the creative and technical process behind every project.",
+      section3: "Outside of game development, I love playing sports, especially team sports, though I also enjoy training on my own. I also like cooking and occasionally drawing, they’re different ways to keep creating and to disconnect a bit from the computer."
+    }
+  };
+
+  function setLanguage(lang) {
+    localStorage.setItem('selectedLang', lang);
+    const t = texts[lang] || texts.es;
+    document.getElementById('nav-home').textContent = t.navHome;
+    document.getElementById('nav-projects').textContent = t.navProjects;
+    document.getElementById('lang-btn').textContent = t.langBtn;
+    document.getElementById('about-title').textContent = t.aboutTitle;
+    document.getElementById('section1').textContent = t.section1;
+    document.getElementById('section2').textContent = t.section2;
+    document.getElementById('section3').textContent = t.section3;
+  }
+
+  const savedLang = localStorage.getItem('selectedLang') || 'es';
+  setLanguage(savedLang);
+
+  document.querySelectorAll('#lang-dropdown button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      setLanguage(lang);
+      langDropdown.style.display = 'none';
+    });
+  });
+});
+</script>
+
+</body>
+</html>
