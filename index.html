@@ -23,37 +23,64 @@ body{
   background:var(--bg);
   color:var(--text);
   margin:0;
-  padding-top:80px; /* espacio para header fijo */
+  padding-top:80px;
   scroll-behavior:smooth;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* HEADER (fijo) */
+/* HEADER */
 header{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
+  top:0;left:0;width:100%;
   background:var(--header-bg);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display:flex;justify-content:space-between;align-items:center;
   padding:14px 36px;
   box-shadow:0 2px 12px rgba(0,0,0,0.6);
   z-index:1000;
 }
-header h1{
-  font-size:1.6rem;
-  color:var(--accent);
-  font-weight:600;
+header h1{font-size:1.6rem;color:var(--accent);font-weight:600;}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* separación entre nombre e iconos */
 }
-
-/* nav */
 nav{display:flex;align-items:center;gap:18px}
 
-/* links botón estilo */
+/* Social Links */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.social-icons a:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* los pone blancos sobre fondo oscuro */
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+
+/* links */
 .nav-item{position:relative}
 .nav-link{
   background:none;border:0;color:var(--text);font:inherit;
@@ -65,94 +92,91 @@ nav{display:flex;align-items:center;gap:18px}
 
 /* botón CV */
 .cv-button{
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  font-weight:600;
-  padding:8px 14px;
-  border-radius:10px;
-  cursor:pointer;
+  background:var(--accent);color:#fff;border:none;font-weight:600;
+  padding:8px 14px;border-radius:10px;cursor:pointer;
   transition:background var(--transition),transform var(--transition);
   text-decoration:none;
 }
-.cv-button:hover{
-  background:#0090cc;
-  transform:translateY(-2px);
-}
+.cv-button:hover{background:#0090cc;transform:translateY(-2px);}
 
-/* dropdown base */
+/* dropdown */
 .dropdown{
-  position:absolute;
-  top:110%;
-  right:0;
+  position:absolute;top:110%;right:0;
   background:var(--panel);
   border-radius:var(--radius);
   box-shadow:0 8px 22px rgba(0,0,0,0.45);
-  display:none;
-  flex-direction:column;
-  min-width:200px;
-  z-index:1001;
+  display:none;flex-direction:column;min-width:200px;z-index:1001;
 }
 .dropdown a, .dropdown button{
-  color:var(--text);
-  text-decoration:none;
-  background:none;
-  border:none;
-  text-align:left;
-  padding:10px 14px;
-  cursor:pointer;
-  font:inherit;
+  color:var(--text);text-decoration:none;background:none;border:none;
+  text-align:left;padding:10px 14px;cursor:pointer;font:inherit;
 }
 .dropdown a:hover, .dropdown button:hover{background:var(--accent);color:#fff}
 
-/* main centrado */
+/* main */
 main{
-  flex:1;
-  width:100%;
-  max-width:1000px;
-  margin:0 auto;
-  padding:40px 20px;
-  text-align:left;
+  flex:1;width:100%;max-width:1000px;margin:0 auto;
+  padding:40px 20px;text-align:left;
 }
 section{width:100%;margin-bottom:60px}
-section h2{
-  text-align:center;margin-bottom:28px;color:var(--accent);font-size:1.8rem;
-}
+section h2{text-align:center;margin-bottom:28px;color:var(--accent);font-size:1.8rem;}
 
-/* proyectos - lista */
+/* proyectos */
 .project-list{display:flex;flex-direction:column;gap:26px}
 .project-item{
   display:flex;align-items:center;gap:20px;
   background:var(--panel);border-radius:var(--radius);
-  box-shadow:0 6px 16px rgba(0,0,0,0.45);padding:18px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.45);
+  padding:18px;position:relative;
   transition:transform var(--transition),box-shadow var(--transition);
 }
 .project-item:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,191,255,0.25)}
 
 /* imagen */
 .project-image{
-  flex:0 0 180px;
-  height:120px;
-  background:#0f1115;
-  border-radius:12px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  flex:0 0 180px;height:120px;background:#0f1115;
+  border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;
 }
 .project-image img{
-  height:100%;
-  width:auto;
-  max-width:100%;
-  object-fit:contain;
-  display:block;
+  height:100%;width:auto;max-width:100%;
+  object-fit:contain;display:block;
 }
 
-/* contenido del proyecto */
-.project-content{flex:1}
+/* contenido */
+.project-content{flex:1;position:relative}
 .project-content h3{font-size:1.15rem;color:var(--accent);margin-bottom:6px}
 .project-content p{font-size:0.95rem;opacity:0.9;line-height:1.45;margin-bottom:6px}
 .project-content a{color:#00BFFF;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* etiquetas */
+.project-tags{
+  position:absolute;
+  bottom:0px;
+  right:14px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  align-items:center;
+  pointer-events:none;
+}
+
+.project-content {
+  flex:1;
+  position:relative;
+  padding-bottom:28px; /* deja espacio para las etiquetas */
+}
+
+.tag{
+  background:rgba(0,191,255,0.15);
+  border:1px solid rgba(0,191,255,0.3);
+  color:var(--accent);
+  font-size:0.75rem;
+  padding:3px 8px;
+  border-radius:8px;
+  backdrop-filter:blur(4px);
+  pointer-events:auto;
+}
 
 /* responsive */
 @media (max-width:880px){
@@ -162,6 +186,11 @@ section h2{
   header{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 18px}
   .project-item{flex-direction:column;text-align:center}
   .project-image{width:100%;height:180px}
+  .project-tags{position:static;justify-content:center;margin-top:6px;}
+  .social-icons {
+  margin-left: 0;
+  margin-top: 6px;
+}
 }
 
 /* footer */
@@ -170,17 +199,20 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 </head>
 <body>
 
-<!-- HEADER FIJO -->
 <header>
-  <h1>Manuel Martín Martín</h1>
+<div class="header-left">
+  <h1>Manuel Martín</h1>
+  <div class="social-icons">
+    <a href="https://www.linkedin.com/in/nelar/" target="_blank"><img src="img/LinkedinIcon.png" alt="LinkedIn"></a>
+    <a href="https://nelar.itch.io/" target="_blank"><img src="img/ItchioIcon.png" alt="Itch.io"></a>
+  </div>
+</div>
 
   <nav>
-    <!-- About -->
     <div class="nav-item">
       <a id="nav-about" class="nav-link" href="#about">About Me</a>
     </div>
 
-    <!-- Proyectos -->
     <div class="nav-item">
       <button id="projects-btn" class="nav-link">Proyectos ▾</button>
       <div id="projects-dropdown" class="dropdown" aria-hidden="true">
@@ -192,7 +224,6 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       </div>
     </div>
 
-    <!-- Idioma -->
     <div class="nav-item">
       <button id="lang-btn" class="nav-link">🌐 Idioma ▾</button>
       <div id="lang-dropdown" class="dropdown" aria-hidden="true">
@@ -201,12 +232,10 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       </div>
     </div>
 
-    <!-- 📄 BOTÓN DESCARGAR CV -->
     <a href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 CV</a>
   </nav>
 </header>
 
-<!-- CONTENIDO -->
 <main>
   <section id="about">
     <h2 id="about-title">About Me</h2>
@@ -229,6 +258,10 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <div class="project-content">
           <h3><a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a></h3>
           <p id="desc-underpacked">Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.</p>
+          <div class="project-tags">
+            <span class="tag">Unreal Engine 5</span>
+            <span class="tag">Local Co-op</span>
+          </div>
         </div>
       </div>
 
@@ -242,6 +275,10 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <div class="project-content">
           <h3><a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a></h3>
           <p id="desc-bubblegum">Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena.</p>
+          <div class="project-tags">
+            <span class="tag">Unity</span>
+            <span class="tag">Local Multiplayer</span>
+          </div>
         </div>
       </div>
 
@@ -255,6 +292,10 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <div class="project-content">
           <h3><a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a></h3>
           <p id="desc-goofyathlon">Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.</p>
+          <div class="project-tags">
+            <span class="tag">Unity</span>
+            <span class="tag">Mobile Controller</span>
+          </div>
         </div>
       </div>
 
@@ -268,6 +309,10 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <div class="project-content">
           <h3><a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a></h3>
           <p id="desc-carnival">Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.</p>
+          <div class="project-tags">
+            <span class="tag">Unity</span>
+            <span class="tag">Local Co-op</span>
+          </div>
         </div>
       </div>
     </div>
@@ -299,12 +344,9 @@ langBtn.addEventListener('click',e=>{
   projectsDropdown.style.display='none';
 });
 
-document.addEventListener('click',()=>{
-  projectsDropdown.style.display='none';
-  langDropdown.style.display='none';
-});
+document.addEventListener('click',()=>{projectsDropdown.style.display='none';langDropdown.style.display='none';});
 
-/* Traducción dinámica */
+/* Traducción */
 const texts={
   es:{
     navAbout:"Sobre mí",
@@ -313,10 +355,10 @@ const texts={
     aboutTitle:"Sobre mí",
     aboutText:"Soy Manuel Martín diseñador de videojuegos con un Máster en Diseño de Videojuegos. Tengo experiencia trabajando con Unreal Engine, Unity y Godot, y una sólida base en programación. He participado en numerosos proyectos personales y de game jams, varios de los cuales han sido premiados.",
     projectsTitle:"Proyectos",
-    underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes. Desarrollado en Unreal Engine 5.",
-    goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el movil como controlador.",
-    carnival:"Juego co-op local donde debes defender la carroza del carnaval, uno defiende la carroza otro recarga municion bailando.",
-    bubblegum:"Enfrentate a tus amigos en varios mini juegos para ver quien se hace con la victoria."
+    underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
+    goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
+    carnival:"Juego co-op local donde debes defender la carroza del carnaval, uno defiende la carroza otro recarga munición bailando.",
+    bubblegum:"Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria."
   },
   en:{
     navAbout:"About Me",
@@ -325,9 +367,9 @@ const texts={
     aboutTitle:"About Me",
     aboutText:"I’m Manuel Martín, a game designer with a Master’s degree in Game Design. I have experience working with Unreal Engine, Unity, and Godot, and a strong background in programming. I’ve participated in numerous personal and game jam projects, several of which have won awards.",
     projectsTitle:"Projects",
-    underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself. Developed in Unreal Engine 5.",
+    underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself.",
     goofyathlon:"Compete in wacky athletic challenges using your phone as a controller.",
-    carnival:"Local co-op game where you must defend the carnival float, one player defends while the other reloads ammo by dancing.",
+    carnival:"Local co-op game where you must defend the carnival float — one player defends while the other reloads ammo by dancing.",
     bubblegum:"Face off against your friends in several mini-games to see who takes the victory."
   }
 };
