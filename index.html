@@ -29,7 +29,8 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body::before {
@@ -63,6 +64,57 @@ header h1{font-size:1.6rem;color:var(--accent);font-weight:600;}
   gap: 12px; /* separación entre nombre e iconos */
 }
 nav{display:flex;align-items:center;gap:18px}
+
+/* About Section */
+
+.about-section{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1000px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1 1 50%;
+  text-align: left;
+}
+
+.about-text h2 {
+  color: var(--accent);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.about-image {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  object-fit: cover;
+}
 
 /* Social Links */
 .social-icons {
@@ -117,6 +169,14 @@ section {
   text-decoration:none;
 }
 .cv-button:hover{background:#0090cc;transform:translateY(-2px);}
+
+.about-text .cv-button {
+  margin-top: 24px;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 /* dropdown */
 .dropdown{
@@ -211,6 +271,20 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   margin-left: 0;
   margin-top: 6px;
 }
+@media (max-width: 800px) {
+  .about-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .about-image img {
+    max-width: 300px;
+  }
+}
 }
 
 /* footer */
@@ -257,14 +331,19 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 </header>
 
 <main>
-  <section id="about">
-    <h2 id="about-title">About Me</h2>
-    <p id="about-text" style="max-width:820px;margin:0 auto;text-align:justify;line-height:1.6">
-      Soy diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables. Trabajo con Unreal Engine y Godot, diseñando niveles que guían al jugador de forma intuitiva.
-    </p>
-    <div style="text-align:center; margin-top:16px;">
-    <a href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 Descargar mi CV</a>
-  </div>
+  <section id="about" class="about-section">
+    <div class="about-container">
+        <div class="about-text">
+            <h2 id="about-title">About Me</h2>
+            <p id="about-text" style="max-width:820px;margin:0 auto;text-align:justify;line-height:1.6">
+            Soy diseñador y programador de videojuegos con pasión por crear mundos interactivos, sistemas equilibrados y experiencias memorables. Trabajo con Unreal Engine y Godot, diseñando niveles que guían al jugador de forma intuitiva.
+            </p>
+            <a id="cv-link" href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 Download my CV</a>
+        </div>
+        <div class="about-image">
+            <img src="img/StandBCN.jpeg" alt= "Manuel Martín Martín"/>
+        </div>
+    </div>
   </section>
 
   <section id="projects">
@@ -378,6 +457,7 @@ const texts={
     langBtn:"🌐 Idioma ▾",
     aboutTitle:"Bienvendio a mi web :D",
     aboutText:"Soy Manuel Martín diseñador de videojuegos con un Máster en Diseño de Videojuegos. Tengo experiencia trabajando con Unreal Engine, Unity y Godot, y una sólida base en programación. He participado en numerosos proyectos personales y game jams, varios de los cuales han sido premiados.",
+    cvLink:"📄 Descargar mi CV",
     projectsTitle:"Proyectos",
     underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
     goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
@@ -390,6 +470,7 @@ const texts={
     langBtn:"🌐 Language ▾",
     aboutTitle:"Welcome to my website :D",
     aboutText:"I’m Manuel Martín, a game designer with a Master’s degree in Game Design. I have experience working with Unreal Engine, Unity, and Godot, and a strong background in programming. I’ve participated in numerous personal and game jam projects, several of which have won awards.",
+    cvLink:"📄 Download my CV",
     projectsTitle:"Projects",
     underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself.",
     goofyathlon:"Compete in wacky athletic challenges using your phone as a controller.",
@@ -412,6 +493,7 @@ function applyLanguage(lang){
   if(document.getElementById('nav-about')) document.getElementById('nav-about').textContent=t.navAbout;
   if(document.getElementById('projects-btn')) document.getElementById('projects-btn').textContent=t.projectsBtn;
   document.getElementById('lang-btn').textContent=t.langBtn;
+  if(document.getElementById('cv-link')) document.getElementById('cv-link').textContent=t.cvLink;
   if(document.getElementById('about-title')) document.getElementById('about-title').textContent=t.aboutTitle;
   if(document.getElementById('about-text')) document.getElementById('about-text').textContent=t.aboutText;
   if(document.getElementById('projects-title')) document.getElementById('projects-title').textContent=t.projectsTitle;
