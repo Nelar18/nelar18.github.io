@@ -320,12 +320,13 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   width: 50px;
   height: 50px;
   filter: brightness(0) invert(1);
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition: transform 0.25s ease, filter 0.25s ease, filter 0.25s ease;
 }
 
-.contact-item a:hover img {
+.contact-item a:hover img,
+.icon-button:hover img {
   transform: scale(1.1);
-  filter: brightness(1) invert(0);
+  filter: brightness(0) saturate(100%) invert(56%) sepia(89%) saturate(1807%) hue-rotate(171deg) brightness(102%) contrast(101%);
 }
 
 .contact-item p {
@@ -334,7 +335,7 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   word-break: break-word;
 }
 
-/* Estilo del botón de copiar */
+/* Estilo del botón de gmail */
 .icon-button {
   background: none;
   border: none;
@@ -351,7 +352,7 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
 
 .icon-button:hover img {
   transform: scale(1.1);
-  filter: brightness(1) invert(0);
+  filter: brightness(0) saturate(100%) invert(56%) sepia(89%) saturate(1807%) hue-rotate(171deg) brightness(102%) contrast(101%);
 }
 
 /* Mensaje de copiado */
@@ -375,6 +376,59 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
 .copy-message.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.05);
+}
+
+
+/* Botón solo visible en móvil */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.menu-toggle:hover {
+  color: #0090cc;
+}
+
+/* Mostrar boton y ocultar menú en pantallas pequeñas */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: var(--header-bg);
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  header {
+    flex-wrap: wrap;
+  }
+
+  .nav-link, .cv-button {
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .dropdown {
+    position: static;
+    box-shadow: none;
+    background: none;
+    padding-left: 16px;
+  }
 }
 
 
@@ -422,6 +476,8 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
   </div>
 </div>
 
+<button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">☰</button>
+
   <nav>
     <div class="nav-item">
       <a id="nav-about" class="nav-link" href="aboutme.html">About Me</a>
@@ -464,7 +520,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
             <a id="cv-link" href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 Download my CV</a>
         </div>
         <div class="about-image">
-            <img src="img/StandBCN.jpeg" alt= "Manuel Martín Martín"/>
+            <img src="img/YoDibujo.png" alt= "Manuel Martín Martín"/>
         </div>
     </div>
   </section>
@@ -535,7 +591,6 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
   <h2 id="contact-title">Contáctame vía:</h2>
   <div class="contact-icons">
     <div class="contact-item">
-      <!-- 🔹 El icono ahora es un botón, no un enlace -->
       <button id="copy-email-btn" class="icon-button" aria-label="Copiar correo">
         <img src="img/GmailIcon.png" alt="Gmail">
       </button>
@@ -554,7 +609,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
   <div id="copy-message" class="copy-message" aria-live="polite"></div>
 </section>
 
-<footer>© 2025 Manuel Martín Martín</footer>
+<footer>© <span id="year"></span> Manuel Martín Martín</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -597,7 +652,8 @@ const texts={
     underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
     goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
     carnival:"Juego co-op local donde debes defender la carroza del carnaval, uno defiende la carroza otro recarga munición bailando.",
-    bubblegum:"Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria."
+    bubblegum:"Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria.",
+    contactTitle:"Contáctame vía:"
   },
   en:{
     navAbout:"About Me",
@@ -612,7 +668,8 @@ const texts={
     underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself.",
     goofyathlon:"Compete in wacky athletic challenges using your phone as a controller.",
     carnival:"Local co-op game where you must defend the carnival float — one player defends while the other reloads ammo by dancing.",
-    bubblegum:"Face off against your friends in several mini-games to see who takes the victory."
+    bubblegum:"Face off against your friends in several mini-games to see who takes the victory.",
+    contactTitle:"Contact me via:"
   }
 };
 
@@ -640,6 +697,7 @@ function applyLanguage(lang){
   if(document.getElementById('desc-goofyathlon')) document.getElementById('desc-goofyathlon').textContent=t.goofyathlon;
   if(document.getElementById('desc-carnival'))document.getElementById('desc-carnival').textContent=t.carnival;
   if(document.getElementById('desc-bubblegum'))document.getElementById('desc-bubblegum').textContent=t.bubblegum;
+  if(document.getElementById('contact-title'))document.getElementById('contact-title').textContent=t.contactTitle;
 }
 
 const savedLang = localStorage.getItem('selectedLang') || 'es';
@@ -672,6 +730,23 @@ emailBtn.addEventListener('click', async () => {
   }
 });
 
+// Menú hamburguesa (móvil)
+const menuToggle = document.getElementById('menu-toggle');
+const nav = document.querySelector('nav');
+
+menuToggle.addEventListener('click', () => {
+  nav.classList.toggle('show');
+});
+
+// Cerrar menú al hacer clic fuera o en un enlace
+document.addEventListener('click', (e) => {
+  if (!header.contains(e.target)) {
+    nav.classList.remove('show');
+  }
+});
+
+
+document.getElementById('year').textContent = new Date().getFullYear();
 
 </script>
 </body>
