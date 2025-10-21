@@ -161,6 +161,19 @@ section {
 }
 .nav-link:hover{background:var(--accent);color:#fff}
 
+.project-item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: var(--radius);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.project-item-link:hover .project-item {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,191,255,0.25);
+  cursor: pointer;
+}
+
 /* botón CV */
 .cv-button{
   background:var(--accent);color:#fff;border:none;font-weight:600;
@@ -218,8 +231,10 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;
 }
 .project-image img{
-  height:100%;width:auto;max-width:100%;
-  object-fit:contain;display:block;
+  height:100%;
+  width:100%;
+  object-fit:cover;
+  display:block;
 }
 
 /* contenido */
@@ -241,6 +256,7 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   pointer-events:none;
 }
 
+
 .project-content {
   flex:1;
   position:relative;
@@ -257,6 +273,110 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   backdrop-filter:blur(4px);
   pointer-events:auto;
 }
+
+.tag-yellow{
+  background:rgba(255,215,0,0.25);
+  color: #FFD700;
+  font-weight: 600;
+  border: 1px solid rgba(255,215,0,0.3);
+  box-shadow: 0 0 6px rgba(255,215,0,0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* contact section */
+.contact-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto 20px auto;
+  text-align: center;
+  background: var(--panel);
+  padding: 30px 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+}
+
+.contact-section h2 {
+  color: var(--accent);
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-item img {
+  width: 50px;
+  height: 50px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.contact-item a:hover img {
+  transform: scale(1.1);
+  filter: brightness(1) invert(0);
+}
+
+.contact-item p {
+  font-size: 1rem;
+  opacity: 0.85;
+  word-break: break-word;
+}
+
+/* Estilo del botón de copiar */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.icon-button img {
+  width: 50px;
+  height: 50px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.icon-button:hover img {
+  transform: scale(1.1);
+  filter: brightness(1) invert(0);
+}
+
+/* Mensaje de copiado */
+.copy-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--accent);
+  color: #fff;
+  padding: 16px 28px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 3000;
+}
+
+.copy-message.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
 
 /* responsive */
 @media (max-width:880px){
@@ -310,12 +430,15 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
     <div class="nav-item">
       <button id="projects-btn" class="nav-link">Proyectos ▾</button>
       <div id="projects-dropdown" class="dropdown" aria-hidden="true">
-        <a id="dropdown-all" href="#projects">Ver todos</a>
+        <a id="dropdown-all" href="projects.html">Ver todos</a>
         <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a>
         <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
         <a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a>
-        <a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a>
       </div>
+    </div>
+
+    <div class= "nav-item">
+        <a id="nav-skills" class="nav-link" href="skills.html"></a>
     </div>
 
     <div class="nav-item">
@@ -351,75 +474,85 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
     <div class="project-list">
 
       <!-- Underpacked -->
-      <div class="project-item">
-        <div class="project-image">
-          <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">
-            <img src="img/UnderPackedLogo.jpg" alt="Underpacked">
-          </a>
+      <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank" class="project-item-link">
+        <div class="project-item">
+            <div class="project-image">    
+                <img src="img/UnderPackedLogo.jpg" alt="Underpacked">
+            </div>
+            <div class="project-content">
+                <h3>Underpacked</h3>
+                <p id="desc-underpacked">Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina.</p>
+                <div class="project-tags">
+                    <span class="tag">Master's Degree Final Project</span>
+                    <span class="tag">Unreal Engine 5</span>
+                    <span class="tag">Local Co-op</span>
+                    <span class="tag tag-yellow">In progress</span>
+                </div>
+            </div>
         </div>
-        <div class="project-content">
-          <h3><a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a></h3>
-          <p id="desc-underpacked">Co-op local donde gestionas una nave y envías paquetes mientras defiendes la cabina. Desarrollado en Unreal Engine 5.</p>
-          <div class="project-tags">
-            <span class="tag">Unreal Engine 5</span>
-            <span class="tag">Local Co-op</span>
-          </div>
-        </div>
-      </div>
+    </a>
 
       <!-- Bubble Gum Royale -->
-      <div class="project-item">
-        <div class="project-image">
-          <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">
-            <img src="img/BubbleGumRoyale.png" alt="Bubble Gum Royale">
-          </a>
+      <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank" class="project-item-link">
+        <div class="project-item">
+            <div class="project-image">    
+                <img src="img/BubbleGumRoyale.png" alt="Bubble Gum Royale">
+            </div>
+            <div class="project-content">
+                <h3>Bubble Gum Royale</h3>
+                <p id="desc-bubblegum"></p>
+                <div class="project-tags">
+                    <span class="tag">Game Jam</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">Local Multiplayer</span>
+                </div>
+            </div>
         </div>
-        <div class="project-content">
-          <h3><a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a></h3>
-          <p id="desc-bubblegum">Combate sobre una galleta giratoria y evita caer al vacío en este divertido battle arena.</p>
-          <div class="project-tags">
-            <span class="tag">Unity</span>
-            <span class="tag">Local Multiplayer</span>
-          </div>
-        </div>
-      </div>
+      </a>
 
       <!-- Goofyathlon -->
-      <div class="project-item">
-        <div class="project-image">
-          <a href="https://eddricman.itch.io/goofyathlon" target="_blank">
-            <img src="img/GoofyAthlon.png" alt="Goofyathlon">
-          </a>
+      <a href="https://eddricman.itch.io/goofyathlon" target="_blank" class="project-item-link">
+        <div class="project-item">
+            <div class="project-image">    
+                <img src="img/GoofyAthlon.png" alt="Goofyathlon">
+            </div>
+            <div class="project-content">
+                <h3>Goofyathlon</h3>
+                <p id="desc-goofyathlon"></p>
+                <div class="project-tags">
+                    <span class="tag">Game Jam</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">Mobile Controller</span>
+                </div>
+            </div>
         </div>
-        <div class="project-content">
-          <h3><a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a></h3>
-          <p id="desc-goofyathlon">Compite en disparatadas pruebas atléticas multijugador llenas de caos y diversión.</p>
-          <div class="project-tags">
-            <span class="tag">Unity</span>
-            <span class="tag">Mobile Controller</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Carnival Swap -->
-      <div class="project-item">
-        <div class="project-image">
-          <a href="https://nelar.itch.io/carnival-swap" target="_blank">
-            <img src="img/CarnivalSwap.png" alt="Carnival Swap">
-          </a>
-        </div>
-        <div class="project-content">
-          <h3><a href="https://nelar.itch.io/carnival-swap" target="_blank">Carnival Swap</a></h3>
-          <p id="desc-carnival">Juego competitivo local donde intercambias habilidades para ganar en minijuegos de feria.</p>
-          <div class="project-tags">
-            <span class="tag">Unity</span>
-            <span class="tag">Local Co-op</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      </a>
   </section>
 </main>
+
+<!-- SECCIÓN DE CONTACTO -->
+<section id="contact" class="contact-section">
+  <h2 id="contact-title">Contáctame vía:</h2>
+  <div class="contact-icons">
+    <div class="contact-item">
+      <!-- 🔹 El icono ahora es un botón, no un enlace -->
+      <button id="copy-email-btn" class="icon-button" aria-label="Copiar correo">
+        <img src="img/GmailIcon.png" alt="Gmail">
+      </button>
+      <p id="email-text">nelardev@gmail.com</p>
+    </div>
+
+    <div class="contact-item">
+      <a href="https://www.linkedin.com/in/nelar/" target="_blank">
+        <img src="img/LinkedinIcon.png" alt="LinkedIn">
+      </a>
+      <p>Manuel Martín Martín</p>
+    </div>
+  </div>
+
+  <!-- Mensaje flotante -->
+  <div id="copy-message" class="copy-message" aria-live="polite"></div>
+</section>
 
 <footer>© 2025 Manuel Martín Martín</footer>
 
@@ -454,11 +587,13 @@ const texts={
   es:{
     navAbout:"Sobre mí",
     projectsBtn:"Proyectos ▾",
+    dropdownAll: "Ver todos",
+    navSkills: "Habilidades",
     langBtn:"🌐 Idioma ▾",
     aboutTitle:"Bienvendio a mi web :D",
     aboutText:"Soy Manuel Martín diseñador de videojuegos con un Máster en Diseño de Videojuegos. Tengo experiencia trabajando con Unreal Engine, Unity y Godot, y una sólida base en programación. He participado en numerosos proyectos personales y game jams, varios de los cuales han sido premiados.",
     cvLink:"📄 Descargar mi CV",
-    projectsTitle:"Proyectos",
+    projectsTitle:"Salón de la fama",
     underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
     goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
     carnival:"Juego co-op local donde debes defender la carroza del carnaval, uno defiende la carroza otro recarga munición bailando.",
@@ -467,11 +602,13 @@ const texts={
   en:{
     navAbout:"About Me",
     projectsBtn:"Projects ▾",
+    dropdownAll: "View All",
+    navSkills: "Skills",
     langBtn:"🌐 Language ▾",
     aboutTitle:"Welcome to my website :D",
     aboutText:"I’m Manuel Martín, a game designer with a Master’s degree in Game Design. I have experience working with Unreal Engine, Unity, and Godot, and a strong background in programming. I’ve participated in numerous personal and game jam projects, several of which have won awards.",
     cvLink:"📄 Download my CV",
-    projectsTitle:"Projects",
+    projectsTitle:"Hall of fame",
     underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself.",
     goofyathlon:"Compete in wacky athletic challenges using your phone as a controller.",
     carnival:"Local co-op game where you must defend the carnival float — one player defends while the other reloads ammo by dancing.",
@@ -491,7 +628,9 @@ document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
 function applyLanguage(lang){
   const t=texts[lang]||texts.es;
   if(document.getElementById('nav-about')) document.getElementById('nav-about').textContent=t.navAbout;
+  if(document.getElementById('nav-skills')) document.getElementById('nav-skills').textContent=t.navSkills;
   if(document.getElementById('projects-btn')) document.getElementById('projects-btn').textContent=t.projectsBtn;
+  document.getElementById('dropdown-all').textContent = t.dropdownAll;
   document.getElementById('lang-btn').textContent=t.langBtn;
   if(document.getElementById('cv-link')) document.getElementById('cv-link').textContent=t.cvLink;
   if(document.getElementById('about-title')) document.getElementById('about-title').textContent=t.aboutTitle;
@@ -506,6 +645,34 @@ function applyLanguage(lang){
 const savedLang = localStorage.getItem('selectedLang') || 'es';
 applyLanguage(savedLang);
 });
+/* Copiar correo y mostrar mensaje */
+const emailBtn = document.getElementById('copy-email-btn');
+const emailText = document.getElementById('email-text');
+const copyMessage = document.getElementById('copy-message');
+
+emailBtn.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(emailText.textContent.trim());
+
+    // Detectar idioma guardado
+    const lang = localStorage.getItem('selectedLang') || 'es';
+    const messages = {
+      es: "Correo copiado al portapapeles 📋",
+      en: "Email copied to clipboard 📋"
+    };
+
+    copyMessage.textContent = messages[lang];
+    copyMessage.classList.add('show');
+
+    setTimeout(() => {
+      copyMessage.classList.remove('show');
+    }, 2000);
+  } catch (err) {
+    console.error('Error al copiar el correo: ', err);
+  }
+});
+
+
 </script>
 </body>
 </html>
