@@ -283,6 +283,29 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   backdrop-filter: blur(4px);
 }
 
+/* Botón "Ver todos" */
+.view-all-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.view-all-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition);
+  font-size: 1.05rem;
+}
+
+.view-all-button:hover {
+  background: #0090cc;
+  transform: translateY(-2px);
+}
+
 /* contact section */
 .contact-section {
   width: 100%;
@@ -583,6 +606,9 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
             </div>
         </div>
       </a>
+    <div class="view-all-container">
+        <a id="view-all-btn" href="projects.html" class="view-all-button">Ver todos</a>
+    </div>
   </section>
 </main>
 
@@ -653,7 +679,8 @@ const texts={
     goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
     carnival:"Juego co-op local donde debes defender la carroza del carnaval, uno defiende la carroza otro recarga munición bailando.",
     bubblegum:"Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria.",
-    contactTitle:"Contáctame vía:"
+    contactTitle:"Contáctame vía:",
+    viewAll: "Ver todos"
   },
   en:{
     navAbout:"About Me",
@@ -669,7 +696,8 @@ const texts={
     goofyathlon:"Compete in wacky athletic challenges using your phone as a controller.",
     carnival:"Local co-op game where you must defend the carnival float — one player defends while the other reloads ammo by dancing.",
     bubblegum:"Face off against your friends in several mini-games to see who takes the victory.",
-    contactTitle:"Contact me via:"
+    contactTitle:"Contact me via:",
+    viewAll: "View all"
   }
 };
 
@@ -687,6 +715,7 @@ function applyLanguage(lang){
   if(document.getElementById('nav-about')) document.getElementById('nav-about').textContent=t.navAbout;
   if(document.getElementById('nav-skills')) document.getElementById('nav-skills').textContent=t.navSkills;
   if(document.getElementById('projects-btn')) document.getElementById('projects-btn').textContent=t.projectsBtn;
+  if(document.getElementById('view-all-btn')) document.getElementById('view-all-btn').textContent = t.viewAll;
   document.getElementById('dropdown-all').textContent = t.dropdownAll;
   document.getElementById('lang-btn').textContent=t.langBtn;
   if(document.getElementById('cv-link')) document.getElementById('cv-link').textContent=t.cvLink;
@@ -730,7 +759,7 @@ emailBtn.addEventListener('click', async () => {
   }
 });
 
-// Menú hamburguesa (móvil)
+// Menú móvil
 const menuToggle = document.getElementById('menu-toggle');
 const nav = document.querySelector('nav');
 
