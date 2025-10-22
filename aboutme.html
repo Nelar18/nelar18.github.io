@@ -122,49 +122,43 @@ section h2{text-align:center;margin-bottom:24px;color:var(--accent);font-size:3.
 section p{line-height:1.6;margin-bottom:20px;text-align:justify;font-size:1.4rem;}
 hr{border:0;height:1px;background:rgba(255,255,255,0.1);margin:40px 0;}
 
-/* --- Layout texto + imagen (ajustable) --- */
 .about-row {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* evita grandes espacios indeseados */
-  gap: 12px;                    /* <--- reduce espacio horizontal entre texto e imagen */
-  margin-bottom: 18px;         /* <--- reduce espacio vertical entre bloques */
+  justify-content: flex-start; 
+  gap: 12px;                    
+  margin-bottom: 18px;        
 }
 
-/* Control más preciso del ancho de cada columna */
 .about-text {
-  /* Ajusta el ancho relativo: 60% texto / 40% imagen por defecto */
-  flex: 0 0 62%;   /* ocupa ~62% del ancho del contenedor */
+  flex: 0 0 62%;   
   max-width: 62%;
-  min-width: 220px; /* evita que el texto se comprima demasiado */
+  min-width: 220px; 
 }
 
 .about-image {
-  flex: 0 0 36%;   /* ocupa ~36% del ancho del contenedor */
+  flex: 0 0 36%;   
   max-width: 36%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Aseguramos que la imagen se comporte y no deje espacio extra */
 .about-image img {
-  display: block;       /* elimina espacio blanco debajo de la img */
-  max-width: 100%;      /* que nunca sobresalga de su contenedor */
+  display: block;     
+  max-width: 100%;      
   height: auto;
-  border-radius: 8px;   /* opcional */
-  margin: 0;            /* elimina márgenes por defecto */
+  border-radius: 8px;   
+  margin: 0;           
 }
 
-/* Si quieres imagen más pequeña visualmente reduce el max-width vía clase:
-   .about-image img { max-width: 90%; } */
 
-/* --- Comportamiento en pantallas pequeñas: apilar y reducir espacios --- */
+
 @media (max-width: 768px) {
   .about-row {
     flex-direction: column;
-    gap: 8px;           /* menos espacio vertical entre texto e imagen en móvil */
-    margin-bottom: 12px; /* espacio entre bloques en móvil */
+    gap: 8px;           
+    margin-bottom: 12px; 
     align-items: stretch;
   }
 
@@ -181,7 +175,7 @@ hr{border:0;height:1px;background:rgba(255,255,255,0.1);margin:40px 0;}
   }
 
   .about-image img {
-    width: 100%; /* imagen ocupa el ancho completo en móvil */
+    width: 100%;
     max-width: 100%;
   }
 }
@@ -314,11 +308,76 @@ hr{border:0;height:1px;background:rgba(255,255,255,0.1);margin:40px 0;}
 }
 
 
-/* responsive */
-@media (max-width:640px){
-  header{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 18px}
-  .social-icons{margin-left:0;margin-top:6px;}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 2rem;
+  cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: transparent;
+    padding: 12px 0px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    box-shadow: none;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    z-index: 1000;
+  }
+
+  .nav-link, .cv-button {
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: var(--panel);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .dropdown.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* footer */
 footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:1px solid rgba(255,255,255,0.04)}
@@ -342,6 +401,10 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       <a id="nav-home" href="index.html" class="nav-link">Inicio</a>
     </div>
 
+    <div class="nav-item">
+      <a id="nav-skills" class="nav-link" href="skills.html">Habilidades</a>
+    </div>
+
     <!-- Dropdown de Proyectos -->
     <div class="nav-item">
       <button id="nav-projects" class="nav-link">Proyectos ▾</button>
@@ -351,10 +414,6 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
         <a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a>
       </div>
-    </div>
-
-    <div class="nav-item">
-      <a id="nav-skills" class="nav-link" href="skills.html">Habilidades</a>
     </div>
 
     <div class="nav-item">
@@ -469,11 +528,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "Por si no lo has notado este mundo me apasiona y siempre estoy trasteando con algo; ya sea siguiendo un tutorial de como hacer un shader, \
         aprendiendo como mejorar en el ámbito de la programación o simplemente dándole forma a ideas de juegos para hacer. Me encanta muchísimo el \
         proceso creativo y técnico que hay detrás de hacer videojuegos. \
-        Aunque soy un poco tímido me encanta ir a eventos a conocer a otros desarrolladores o incluso a presentar mis juegos.",
+        Aunque soy un poco tímido me encanta ir a eventos a conocer a otros desarrolladores o incluso a presentar mis juegos :0.",
         section3:
         "Y ya fuera del ámbito del desarrollo, me encantan los animales estos son mis gatos:",
         section3b:
-        "También me gusta mucho el anime y, por desgracia... el lol (🤘🏻😔). \
+        "También me gusta mucho el anime y, por desgracia... El lol (🤘🏻😔). \
         También salir a saltar a la comba o simplemente hacer deporte para descansar del pc."
     },
     en: {
@@ -483,13 +542,19 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdownAll: "View All",
         langBtn: "🌐 Language ▾",
         aboutTitle: "About Me",
-        section1: "Since I was a child, I’ve always loved playing video games. In high school, during computer science classes, I started creating my first games, and I haven’t stopped tinkering ever since. Seeing people enjoy my projects, whether in game jams, personal works, or even commercial games, has reaffirmed that what I love most is making people have fun through my games.",
-        section2: "I’m passionate about this world and I’m always exploring new things to experiment with. Whether it’s learning to create shaders (even if they don’t always turn out great), discovering new ways to program, or coming up with new game ideas, I truly enjoy the creative and technical process behind every project.",
+        section1: 
+        "Heeey! Since I was a kid, I’ve been surrounded by video games. Playing Pokémon on my Nintendo DS or Metal Slug on PC. \
+        That made me create my first game in computer class, a little ASCII version of Snake. After that, I moved to Unity and started \
+        taking it more seriously. Since then, I haven’t stopped making games, using Unity, Unreal, or Godot. Seeing people have fun with \
+        what I make really makes me feel this is where I want to be.",
+        section2: 
+        "In case you haven’t noticed, I’m really passionate about this world and I’m always messing around with something. Whether it’s \
+        following a tutorial on how to make a shader, learning how to get better at programming, or just shaping new video game ideas. I really \
+        love the creative and technical process behind making video games. Even though I’m a bit shy, I love going to events to meet other developers or even show my own games :0.",
         section3:
-        "Y ya fuera del ámbito del desarrollo, me encantan los animales estos son mis gatos:",
+        "And outside of game development, I really love animals. These are my cats:",
         section3b:
-        "Por si no lo habías notado, me gusta mucho el anime y, por desgracia, el lol(🤘🏻😔). \
-        También salir a saltar a la comba o simplemente hacer deporte para descansar del pc."
+        "I also really like anime and, sadly... League of Legends (🤘🏻😔). I also enjoy jumping rope or just doing some sports to take a break from the PC."
     }
   };
 
