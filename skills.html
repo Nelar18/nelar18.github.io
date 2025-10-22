@@ -88,11 +88,7 @@ nav{display:flex;align-items:center;gap:18px}
 }
 .cv-button:hover{background:#0090cc;transform:translateY(-2px);}
 
-/* --- Dropdown Fix --- */
-.nav-item {
-  position: relative;
-}
-
+/* Dropdown */
 .dropdown {
   position: absolute;
   top: calc(100% + 6px);
@@ -108,15 +104,12 @@ nav{display:flex;align-items:center;gap:18px}
   transform: translateY(-8px);
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
 .dropdown.show {
   display: flex;
   opacity: 1;
   transform: translateY(0);
 }
-
-.dropdown a,
-.dropdown button {
+.dropdown a, .dropdown button {
   color: var(--text);
   text-decoration: none;
   background: none;
@@ -127,9 +120,7 @@ nav{display:flex;align-items:center;gap:18px}
   font: inherit;
   width: 100%;
 }
-
-.dropdown a:hover,
-.dropdown button:hover {
+.dropdown a:hover, .dropdown button:hover {
   background: var(--accent);
   color: #fff;
 }
@@ -159,10 +150,15 @@ section p{line-height:1.6;margin-bottom:20px;text-align:justify;font-size:1.4rem
 }
 .skill-card:hover{
   transform:translateY(-6px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.6);
+  box-shadow:0 0 20px var(--accent);
 }
 .skill-card h3{color:var(--accent);margin-bottom:10px;}
 .skill-card p{font-size:1rem;text-align:center;}
+.skill-card img{
+  width:60px;height:60px;margin-bottom:10px;
+  filter:brightness(0) invert(1);
+  opacity:0.9;
+}
 
 /* Responsive Header */
 .menu-toggle {
@@ -224,27 +220,27 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
 <main>
   <section id="skills">
     <h2 id="skills-title">Habilidades</h2>
-    <p id="skills-text">
-      Aquí puedes ver algunas de las herramientas y áreas en las que trabajo y disfruto mejorando cada día.
-    </p>
-
+    <h3 style="text-align:center;color:var(--accent);font-size:2.4rem;">Hard Skills</h3>
     <div class="skills-grid">
-      <div class="skill-card">
-        <h3>Unity</h3>
-        <p>Desarrollo de juegos 2D y 3D, creación de mecánicas y sistemas de gameplay.</p>
-      </div>
-      <div class="skill-card">
-        <h3>Unreal Engine</h3>
-        <p>Blueprints y C++ básicos, prototipado rápido y desarrollo visual.</p>
-      </div>
-      <div class="skill-card">
-        <h3>Godot</h3>
-        <p>Uso de GDScript y experimentación con proyectos personales.</p>
-      </div>
-      <div class="skill-card">
-        <h3>Game Design</h3>
-        <p>Diseño de niveles, balance y análisis de la experiencia del jugador.</p>
-      </div>
+      <div class="skill-card" data-key="gamedesign"><img src="img/gamedesign.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="unity"><img src="img/unity.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="unreal"><img src="img/unreal.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="godot"><img src="img/godot.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="blender"><img src="img/blender.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="jira"><img src="img/jira.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="excel"><img src="img/excel.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="perforce"><img src="img/perforce.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="git"><img src="img/git.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="adobe"><img src="img/adobe.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="spanish"><img src="img/spain.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="english"><img src="img/england.png"><h3></h3><p></p></div>
+    </div>
+
+    <h3 style="text-align:center;margin-top:60px;color:var(--accent);font-size:2.4rem;">Soft Skills</h3>
+    <div class="skills-grid">
+      <div class="skill-card" data-key="comunicar"><img src="img/comunicar.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="autodidacta"><img src="img/autodidacta.png"><h3></h3><p></p></div>
+      <div class="skill-card" data-key="adaptabilidad"><img src="img/multidisciplinar.png"><h3></h3><p></p></div>
     </div>
   </section>
 </main>
@@ -258,7 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectsBtn = document.getElementById('nav-projects');
   const projectsDropdown = document.getElementById('projects-dropdown');
 
-  /* Dropdown toggles */
   langBtn.addEventListener('click', e => {
     e.stopPropagation();
     langDropdown.classList.toggle('show');
@@ -283,16 +278,48 @@ document.addEventListener("DOMContentLoaded", () => {
       dropdownAll: "Ver todos",
       langBtn: "🌐 Idioma ▾",
       skillsTitle: "Habilidades",
-      skillsText: "Aquí puedes ver algunas de las herramientas y áreas en las que trabajo y disfruto mejorando cada día."
+      cards: {
+        gamedesign: ["Game Design","Documentación, diseño de niveles, balance y análisis de datos."],
+        unity: ["Unity","Desarrollo de juegos 2D y 3D, creación de mecánicas y sistemas de gameplay, C#."],
+        unreal: ["Unreal Engine","Desarrollo de juegos 3D, uso de Blueprints."],
+        godot: ["Godot","Desarrollo de juegos 2D y 3D usando GDScript."],
+        blender: ["Blender","Habilidad media en modelado y animación 3D."],
+        jira: ["Jira","Experiencia en gestión ágil de proyectos con metodologías Scrum y Kanban."],
+        excel: ["Excel","Creación de tablas y visualizadores para su uso en diseño."],
+        perforce: ["Perforce","Habilidad media en el uso de control de versiones."],
+        git: ["Git","Habilidad media en el uso de control de versiones."],
+        adobe: ["Adobe Suite","Uso avanzado de Photoshop y Premiere."],
+        comunicar: ["Comunicación efectiva","Capacidad para comunicarme efectivamente con personas de distintos departamentos."],
+        autodidacta: ["Autodidacta","Siempre en búsqueda de aprender cosas nuevas y mejorar mis conocimientos."],
+        adaptabilidad: ["Adaptabilidad","Me adapto con facilidad a cambios y contextos distintos."],
+        spanish: ["Español", "Nativo."],
+        english: ["Inglés", "Nivel equivalente a B2."]
+      }
     },
     en: {
       navHome: "Home",
       navAbout: "About me",
       navProjects: "Projects ▾",
-      dropdownAll: "View All",
+      dropdownAll: "View all",
       langBtn: "🌐 Language ▾",
       skillsTitle: "Skills",
-      skillsText: "Here you can see some of the tools and areas I work with and enjoy improving every day."
+      cards: {
+        gamedesign: ["Game Design","Documentation, level design, balancing, and data analysis."],
+        unity: ["Unity","2D and 3D game development, gameplay systems, and C# scripting."],
+        unreal: ["Unreal Engine","3D game development and Blueprint scripting."],
+        godot: ["Godot","2D and 3D game development using GDScript."],
+        blender: ["Blender","Intermediate skill in 3D modeling and animation."],
+        jira: ["Jira","Experience in agile project management using Scrum and Kanban methodologies."],
+        excel: ["Excel","Creating tables and visual tools for design purposes."],
+        perforce: ["Perforce","Intermediate version control skills."],
+        git: ["Git","Intermediate version control skills."],
+        adobe: ["Adobe Suite","Advanced use of Photoshop and Premiere."],
+        comunicar: ["Effective Comunication","Ability to communicate effectively with people from different departments."],
+        autodidacta: ["Self-taught","Always eager to learn new things and expand my knowledge."],
+        adaptabilidad: ["Adaptability","I easily adapt to changes and different contexts."],
+        spanish: ["Spanish", "Native."],
+        english: ["English", "Level equivalent to B2."]
+      }
     }
   };
 
@@ -305,14 +332,21 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('dropdown-all').textContent = t.dropdownAll;
     document.getElementById('lang-btn').textContent = t.langBtn;
     document.getElementById('skills-title').textContent = t.skillsTitle;
-    document.getElementById('skills-text').textContent = t.skillsText;
+
+    document.querySelectorAll('.skill-card').forEach(card=>{
+      const key=card.dataset.key;
+      if(t.cards[key]){
+        card.querySelector('h3').textContent=t.cards[key][0];
+        card.querySelector('p').textContent=t.cards[key][1];
+      }
+    });
   }
 
   const savedLang = localStorage.getItem('selectedLang') || 'es';
   setLanguage(savedLang);
 
-  document.querySelectorAll('#lang-dropdown button').forEach(btn => {
-    btn.addEventListener('click', () => {
+  document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
       setLanguage(btn.dataset.lang);
       langDropdown.classList.remove('show');
     });
@@ -320,9 +354,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* Menú móvil */
-const menuToggle = document.getElementById('menu-toggle');
-const nav = document.querySelector('nav');
-menuToggle.addEventListener('click', () => nav.classList.toggle('show'));
+const menuToggle=document.getElementById('menu-toggle');
+const nav=document.querySelector('nav');
+menuToggle.addEventListener('click',()=>nav.classList.toggle('show'));
 </script>
 
 </body>

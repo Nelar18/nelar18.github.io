@@ -243,7 +243,10 @@ section p{line-height:1.6;margin-bottom:20px;text-align:left; font-size: 1.4rem;
   padding:18px;position:relative;
   transition:transform var(--transition),box-shadow var(--transition);
 }
-.project-item:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,191,255,0.25)}
+.project-item-link:hover .project-item {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px var(--accent);
+}
 
 /* imagen */
 .project-image{

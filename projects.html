@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Proyectos - Manuel Martín Martín</title>
+<style>
+:root{
+  --bg:#393E4D;
+  --header-bg:#17191e;
+  --panel:#17191e;
+  --accent:#00bfff;
+  --text:#f3f4f6;
+  --radius:14px;
+  --transition:0.3s ease;
+}
+
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding-top:80px;
+  scroll-behavior:smooth;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background-image:url('img/Banner.png');
+  background-repeat:repeat;
+  background-size:auto;
+  opacity:0.2;
+  z-index:-1;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  background:var(--header-bg);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 36px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.6);
+  z-index:1000;
+}
+header h1{font-size:1.6rem;color:var(--accent);font-weight:600;}
+.header-left{display:flex;align-items:center;gap:12px;}
+nav{display:flex;align-items:center;gap:18px}
+
+/* Social Icons */
+.social-icons{display:flex;align-items:center;gap:10px;}
+.social-icons a{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  overflow:hidden;background:rgba(255,255,255,0.05);
+  transition:transform 0.25s ease,background 0.25s ease;
+}
+.social-icons a:hover{background:var(--accent);transform:scale(1.1);}
+.social-icons img{width:30px;height:30px;filter:brightness(0) invert(1);}
+
+/* Nav Links */
+.nav-item{position:relative;}
+.nav-link{
+  background:none;border:0;color:var(--text);font:inherit;
+  cursor:pointer;padding:8px 12px;border-radius:10px;
+  transition:background var(--transition),color var(--transition);
+  text-decoration:none;
+}
+.nav-link:hover{background:var(--accent);color:#fff}
+
+/* Botón CV */
+.cv-button{
+  background:var(--accent);color:#fff;border:none;font-weight:600;
+  padding:8px 14px;border-radius:10px;cursor:pointer;
+  transition:background var(--transition),transform var(--transition);
+  text-decoration:none;
+}
+.cv-button:hover{background:#0090cc;transform:translateY(-2px);}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 1001;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.dropdown.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+.dropdown a, .dropdown button {
+  color: var(--text);
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 14px;
+  cursor: pointer;
+  font: inherit;
+  width: 100%;
+}
+.dropdown a:hover, .dropdown button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* MAIN */
+main{
+  flex:1;width:100%;max-width:1600px;margin:0 auto;
+  padding:40px 24px;text-align:left;
+}
+h2{text-align:center;margin-bottom:24px;color:var(--accent);font-size:3rem;}
+
+/* Projects grid */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:32px;
+  margin-top:40px;
+}
+.projects-grid a{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+.project-card{
+  background:var(--panel);
+  border-radius:var(--radius);
+  box-shadow:0 6px 16px rgba(0,0,0,0.45);
+  overflow:hidden;
+  transition:transform var(--transition), box-shadow var(--transition);
+  display:flex;
+  flex-direction:column;
+  height:380px;
+}
+.project-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 20px var(--accent);
+}
+.project-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.project-card-content{
+  padding:18px 20px 24px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  flex-grow:1;
+}
+.project-card-content h3{
+  color:var(--accent);
+  font-size:1.25rem;
+  margin-bottom:8px;
+}
+.project-card-content p{
+  font-size:1rem;
+  opacity:0.9;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+.project-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:auto;
+}
+.tag{
+  background:rgba(0,191,255,0.15);
+  border:1px solid rgba(0,191,255,0.3);
+  color:var(--accent);
+  font-size:0.8rem;
+  padding:4px 8px;
+  border-radius:8px;
+  backdrop-filter:blur(4px);
+}
+.tag-yellow{
+  background:rgba(255,215,0,0.25);
+  color:#FFD700;
+  border:1px solid rgba(255,215,0,0.3);
+  font-weight:600;
+  box-shadow:0 0 6px rgba(255,215,0,0.4);
+}
+
+/* Responsive Header */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 2rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  nav {display: none;flex-direction: column;width: 100%;background: var(--header-bg); border-top: 1px solid rgba(255,255,255,0.1);}
+  nav.show {display: flex;}
+  .menu-toggle {display: block;}
+  header {flex-wrap: wrap;}
+  .nav-link, .cv-button {text-align: center;width: 100%;padding: 12px;}
+}
+
+footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:1px solid rgba(255,255,255,0.04)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Manuel Martín</h1>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/nelar/" target="_blank"><img src="img/LinkedinIcon.png" alt="LinkedIn"></a>
+      <a href="https://nelar.itch.io/" target="_blank"><img src="img/ItchioIcon.png" alt="Itch.io"></a>
+    </div>
+  </div>
+
+  <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">☰</button>
+
+  <nav>
+    <a id="nav-home" href="index.html" class="nav-link">Inicio</a>
+    <a id="nav-about" href="aboutme.html" class="nav-link">Sobre mí</a>
+    <a id="nav-skills" href="skills.html" class="nav-link">Habilidades</a>
+    <div class="nav-item">
+      <button id="lang-btn" class="nav-link">🌐 Idioma ▾</button>
+      <div id="lang-dropdown" class="dropdown" aria-hidden="true">
+        <button data-lang="es">Español 🇪🇸</button>
+        <button data-lang="en">English 🇬🇧</button>
+      </div>
+    </div>
+    <a href="files/ManuelMartinMartinGameDesignCV.pdf" download class="cv-button">📄 CV</a>
+  </nav>
+</header>
+
+<main>
+  <h2 id="projects-title">Proyectos</h2>
+  <div class="projects-grid">
+
+    <!-- UNDERPACKED -->
+    <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">
+      <div class="project-card">
+        <img src="img/UnderPackedLogo.jpg" alt="Underpacked">
+        <div class="project-card-content">
+          <h3>Underpacked</h3>
+          <p id="desc-underpacked"></p>
+          <div class="project-tags">
+            <span class="tag">Master's Degree Final Project</span>
+            <span class="tag">Unreal Engine 5</span>
+            <span class="tag">Local Co-op</span>
+            <span class="tag tag-yellow">In Progress</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- BUBBLE GUM ROYALE -->
+    <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">
+      <div class="project-card">
+        <img src="img/BubbleGumRoyale.png" alt="Bubble Gum Royale">
+        <div class="project-card-content">
+          <h3>Bubble Gum Royale</h3>
+          <p id="desc-bubble"></p>
+          <div class="project-tags">
+            <span class="tag">Game Jam</span>
+            <span class="tag">Unity</span>
+            <span class="tag">Local Multiplayer</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- GOOFYATHLON -->
+    <a href="https://eddricman.itch.io/goofyathlon" target="_blank">
+      <div class="project-card">
+        <img src="img/GoofyAthlon.png" alt="Goofyathlon">
+        <div class="project-card-content">
+          <h3>Goofyathlon</h3>
+          <p id="desc-goofy"></p>
+          <div class="project-tags">
+            <span class="tag">Game Jam</span>
+            <span class="tag">Unity</span>
+            <span class="tag">Mobile Controller</span>
+          </div>
+        </div>
+      </div>
+    </a>    
+    
+    <!-- CARNIVAL SWAP -->
+    <a href="https://nelar.itch.io/carnival-swap" target="_blank">
+      <div class="project-card">
+        <img src="img/CarnivalSwap.png" alt="CarnivalSwap">
+        <div class="project-card-content">
+          <h3>Carnival Swap</h3>
+          <p id="desc-carnival"></p>
+          <div class="project-tags">
+            <span class="tag">Game Jam</span>
+            <span class="tag">Unity</span>
+            <span class="tag">local Co-op</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>© 2025 Manuel Martín Martín</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const langBtn = document.getElementById('lang-btn');
+  const langDropdown = document.getElementById('lang-dropdown');
+
+  langBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    langDropdown.classList.toggle('show');
+  });
+  document.addEventListener('click', () => {
+    langDropdown.classList.remove('show');
+  });
+
+  /* Traducciones */
+  const texts = {
+    es: {
+      navHome: "Inicio",
+      navAbout: "Sobre mí",
+      navSkills: "Habilidades",
+      langBtn: "🌐 Idioma ▾",
+      projectsTitle: "Proyectos",
+      descUnderpacked: "Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
+      descBubble: "Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria.",
+      descGoofy: "Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
+      descCarnival: "Defiende con el cañón de confeti la carroza del carnaval al ritmo de la música."
+    },
+    en: {
+      navHome: "Home",
+      navAbout: "About me",
+      navSkills: "Skills",
+      langBtn: "🌐 Language ▾",
+      projectsTitle: "Projects",
+      descUnderpacked: "Local co-op where you manage a spaceship and send packages while defending yourself.",
+      descBubble: "Face off against your friends in several mini-games to see who takes the victory.",
+      descGoofy: "Compete in wacky athletic challenges using your phone as a controller.",
+      descCarnival: "Defend the carnival float with the confetti cannon to the rhythm of the music."
+    }
+  };
+
+  function setLanguage(lang) {
+    localStorage.setItem('selectedLang', lang);
+    const t = texts[lang] || texts.es;
+    document.getElementById('nav-home').textContent = t.navHome;
+    document.getElementById('nav-about').textContent = t.navAbout;
+    document.getElementById('nav-skills').textContent = t.navSkills;
+    document.getElementById('lang-btn').textContent = t.langBtn;
+    document.getElementById('projects-title').textContent = t.projectsTitle;
+    document.getElementById('desc-underpacked').textContent = t.descUnderpacked;
+    document.getElementById('desc-bubble').textContent = t.descBubble;
+    document.getElementById('desc-goofy').textContent = t.descGoofy;
+    document.getElementById('desc-carnival').textContent = t.descCarnival;
+  }
+
+  const savedLang = localStorage.getItem('selectedLang') || 'es';
+  setLanguage(savedLang);
+
+  document.querySelectorAll('#lang-dropdown button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      setLanguage(btn.dataset.lang);
+      langDropdown.classList.remove('show');
+    });
+  });
+});
+
+/* Menú móvil */
+const menuToggle=document.getElementById('menu-toggle');
+const nav=document.querySelector('nav');
+menuToggle.addEventListener('click',()=>nav.classList.toggle('show'));
+</script>
+
+</body>
+</html>
