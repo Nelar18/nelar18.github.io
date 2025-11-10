@@ -287,6 +287,22 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
       </div>
     </a>
 
+    <!--  Who are you again? -->
+    <a href="https://paxcu.itch.io/whoareyouagain" target="_blank">
+      <div class="project-card">
+        <img src="img/WhoAreYouAgain.png" alt="WhoAreYouAgain">
+        <div class="project-card-content">
+          <h3>Who Are You Again?</h3>
+          <p id="desc-whoareyouagain"></p>
+          <div class="project-tags">
+            <span class="tag">Game Jam</span>
+            <span class="tag">Unity</span>
+            <span class="tag">Cozy</span>
+          </div>
+        </div>
+      </div>
+    </a>
+    
     <!-- GOOFYATHLON -->
     <a href="https://eddricman.itch.io/goofyathlon" target="_blank">
       <div class="project-card">
@@ -322,7 +338,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
   </div>
 </main>
 
-<footer>© 2025 Manuel Martín Martín</footer>
+<footer>© <span id="year"></span> Manuel Martín Martín</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -348,6 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
       descUnderpacked: "Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
       descBubble: "Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria.",
       descGoofy: "Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
+      descWhoareyouagain:"Conoce la hitoria de un padre a traves de sus recuerdos.",
       descCarnival: "Defiende con el cañón de confeti la carroza del carnaval al ritmo de la música."
     },
     en: {
@@ -359,6 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
       descUnderpacked: "Local co-op where you manage a spaceship and send packages while defending yourself.",
       descBubble: "Face off against your friends in several mini-games to see who takes the victory.",
       descGoofy: "Compete in wacky athletic challenges using your phone as a controller.",
+      descWhoareyouagain:"Discover the story of a father through their memories.",
       descCarnival: "Defend the carnival float with the confetti cannon to the rhythm of the music."
     }
   };
@@ -375,6 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('desc-bubble').textContent = t.descBubble;
     document.getElementById('desc-goofy').textContent = t.descGoofy;
     document.getElementById('desc-carnival').textContent = t.descCarnival;
+    document.getElementById('desc-whoareyouagain').textContent = t.descWhoareyouagain;
   }
 
   const savedLang = localStorage.getItem('selectedLang') || 'es';
@@ -392,6 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const menuToggle=document.getElementById('menu-toggle');
 const nav=document.querySelector('nav');
 menuToggle.addEventListener('click',()=>nav.classList.toggle('show'));
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>

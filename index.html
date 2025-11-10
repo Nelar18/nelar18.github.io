@@ -551,6 +551,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a>
         <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
         <a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a>
+        <a href="https://paxcu.itch.io/whoareyouagain" target="_blank">Who Are You Again?</a>
       </div>
     </div>
 
@@ -636,6 +637,24 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
                     <span class="tag">Game Jam</span>
                     <span class="tag">Unity</span>
                     <span class="tag">Mobile Controller</span>
+                </div>
+            </div>
+        </div>
+      </a>
+      
+      <!-- Who are you again? -->
+      <a href="https://paxcu.itch.io/whoareyouagain" target="_blank" class="project-item-link">
+        <div class="project-item">
+            <div class="project-image">    
+                <img src="img/WhoAreYouAgain.png" alt="Who are you again?">
+            </div>
+            <div class="project-content">
+                <h3>Who Are You Again?</h3>
+                <p id="desc-whoareyouagain"></p>
+                <div class="project-tags">
+                    <span class="tag">Game Jam</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">Cozy</span>
                 </div>
             </div>
         </div>
@@ -773,6 +792,7 @@ document.addEventListener("DOMContentLoaded", () => {
       underpacked:"Co-op local donde gestionas una nave y envías paquetes mientras te defiendes.",
       goofyathlon:"Compite en disparatadas pruebas atléticas moviendote usando el móvil como controlador.",
       bubblegum:"Enfréntate a tus amigos en varios mini juegos para ver quién se hace con la victoria.",
+      whoareyouagain:"Conoce la hitoria de un padre a traves de sus recuerdos",
       contactTitle:"Contáctame vía:",
       viewAll: "Ver todos"
     },
@@ -789,6 +809,7 @@ document.addEventListener("DOMContentLoaded", () => {
       underpacked:"Local co-op game where you manage a spaceship and send packages while defending yourself.",
       goofyathlon:"Compete in wacky athletic challenges using your phone as a controller.",
       bubblegum:"Face off against your friends in several mini-games to see who takes the victory.",
+      whoareyouagain:"Discover the story of a father through their memories.",
       contactTitle:"Contact me via:",
       viewAll: "View all"
     }
@@ -818,6 +839,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(document.getElementById('desc-underpacked')) document.getElementById('desc-underpacked').textContent=t.underpacked;
     if(document.getElementById('desc-goofyathlon')) document.getElementById('desc-goofyathlon').textContent=t.goofyathlon;
     if(document.getElementById('desc-bubblegum'))document.getElementById('desc-bubblegum').textContent=t.bubblegum;
+    if(document.getElementById('desc-whoareyouagain'))document.getElementById('desc-whoareyouagain').textContent=t.whoareyouagain;
     if(document.getElementById('contact-title'))document.getElementById('contact-title').textContent=t.contactTitle;
   }
 

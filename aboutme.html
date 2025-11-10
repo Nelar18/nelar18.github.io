@@ -413,6 +413,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
         <a href="https://store.steampowered.com/app/3587480/Underpacked/" target="_blank">Underpacked</a>
         <a href="https://nacho-del-castillo.itch.io/bubblegum-royale" target="_blank">Bubble Gum Royale</a>
         <a href="https://eddricman.itch.io/goofyathlon" target="_blank">Goofyathlon</a>
+        <a href="https://paxcu.itch.io/whoareyouagain" target="_blank">Who Are You Again?</a>
       </div>
     </div>
 
@@ -482,7 +483,7 @@ footer{text-align:center;font-size:0.9rem;opacity:0.7;padding:28px 0;border-top:
   </section>
 </main>
 
-<footer>© 2025 Manuel Martín Martín</footer>
+<footer>© <span id="year"></span> Manuel Martín Martín</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -600,6 +601,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
